@@ -1,13 +1,16 @@
 library(shiny)
 
 shinyServer(function(input, output) {
-    output$contents <- renderDataTable({
+    geneExpression <- reactive({
         file <- input$input
-        ext <- tools::file_ext(file$datapath)
-        
+        ext <- tools::file_ext(input$input$datapath)
         req(file)
-        validate(need(ext == "csv", "Please upload a csv file"))
-        
-        read.csv(file$datapath, header = input$header)
+        validate(need(input$input, ext == "csv", "Please upload a csv file"))
+        data = read.csv(file$datapath, header = input$header)
     })
+
+    output$contents <-
+        renderDataTable({
+            geneExpression()
+        })
 })
