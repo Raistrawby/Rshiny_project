@@ -2,7 +2,6 @@ source("./src/server/WDI.R")
 source("./src/server/input.R")
 
 library(shiny)
-library(shinyalert)
 
 shinyServer(function(input, output, session) {
     # Input tab ############################
