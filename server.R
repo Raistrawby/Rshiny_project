@@ -1,3 +1,5 @@
+source("./src/UI/export.R")
+
 library(shiny)
 
 shinyServer(function(input, output) {
@@ -18,4 +20,6 @@ shinyServer(function(input, output) {
         renderDataTable({
             geneExpression()
         })
+    
+    output$volcanoPlot <- renderPlot({volcanoPlot(geneExpression(), 0.6, 0.05)})
 })

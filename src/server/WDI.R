@@ -38,8 +38,9 @@ MAPlot <- function(data, pvalueFilter) {
     scale_x_log10() +
     scale_color_manual(values = c("black", "red"), labels=c('Not significant', 'Significant')) +
     labs(title = "Volcano plot",
-         x = "log2(Fold Change)",
-         y = "-log10(FDR)") +
+         colour = "Significance",
+         x = "Mean expression (log)",
+         y = "log2(Fold Change)") +
     theme(plot.title = element_text(face = "bold"))
 }
 
