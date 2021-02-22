@@ -5,14 +5,14 @@
   all(z >= 0 & !is.na(z))
 }
 
-readFile <- function(input, header) {
+readFile <- function(input) {
   file <- input
   if (is.null(file)) {
-    data = read.csv("data/res_DE2.csv", header = header)
+    data = read.csv("data/res_DE2.csv", header = TRUE)
   } else {
     ext <- tools::file_ext(input$datapath)
     validate(need(ext == "csv", "Please upload a csv file"))
-    data = read.csv(file$datapath, header = input$header)
+    data = read.csv(file$datapath, header = TRUE)
   }
   # Check header
   validate(
