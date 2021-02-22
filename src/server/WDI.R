@@ -1,0 +1,47 @@
+library(ggplot2)
+
+volcanoPlot <- function(data, logFilter, pvalueFilter) {
+  data$diffexpdatased <- "NO"
+  data$diffexpdatased[data$log2FoldChange > logFilter &
+                        data$pvalue < pvalueFilter] <- "UP"
+  data$diffexpdatased[data$log2FoldChange < -logFilter &
+                        data$pvalue < pvalueFilter] <- "DOWN"
+  
+  ggplot(data, aes(
+    x = log2FoldChange,
+    y = -log10(pvalue),
+    col = diffexpdatased
+  )) +
+    geom_point() +
+    scale_color_manual(values = c("blue", "black", "red")) +
+    geom_vline(xintercept = c(-logFilter, logFilter),
+               col = "red") +
+    geom_hline(yintercept = -log10(pvalueFilter), col = "red") +
+    labs(
+      colour = "Differencial expression",
+      title = "Volcano plot",
+      x = "log2(Fold Change)",
+      y = "-log10(FDR)"
+    ) +
+    theme(plot.title = element_text(face = "bold"))
+}
+
+MAPlot <- function(data, pvalueFilter) {
+  data$diffexpdatased <- "NO"
+  data$diffexpdatased[data$pvalue < pvalueFilter] <- "YES"
+  
+  ggplot(data,
+         aes(x = baseMean,
+             y = log2FoldChange,
+             col = diffexpdatased)) +
+    geom_point() +
+    scale_x_log10() +
+    scale_color_manual(values = c("black", "red"), labels=c('Not significant', 'Significant')) +
+    labs(title = "Volcano plot",
+         x = "log2(Fold Change)",
+         y = "-log10(FDR)") +
+    theme(plot.title = element_text(face = "bold"))
+}
+
+volcanoPlot(data, 0.6, 0.05)
+MAPlot(data, 0.05)
