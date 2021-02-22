@@ -1,9 +1,9 @@
-source("./src/inputUI.R")
-source("./src/generalAnalysisUI.R")
-source("./src/goUI.R")
-source("./src/pathwayUI.R")
-source("./src/proteinDomainUI.R")
-source("./src/exportUI.R")
+source("./src/UI/input.R")
+source("./src/UI/generalAnalysis.R")
+source("./src/UI/go.R")
+source("./src/UI/pathway.R")
+source("./src/UI/proteinDomain.R")
+source("./src/UI/export.R")
 
 library(shiny)
 

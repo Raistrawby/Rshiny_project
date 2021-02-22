@@ -8,8 +8,13 @@ shinyServer(function(input, output) {
         validate(need(input$input, ext == "csv", "Please upload a csv file"))
         data = read.csv(file$datapath, header = input$header)
     })
-
+    
     output$contents <-
+        renderDataTable({
+            geneExpression()
+        })
+    
+    output$goContent <-
         renderDataTable({
             geneExpression()
         })
