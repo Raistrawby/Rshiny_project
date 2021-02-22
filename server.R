@@ -1,4 +1,3 @@
-source("./src/UI/export.R")
 source("./src/server/WDI.R")
 
 library(shiny)
@@ -7,13 +6,14 @@ shinyServer(function(input, output, session) {
     # Input tab
     geneExpression <- reactive({
         file <- input$input
-        if(is.null(file)) {
+        if (is.null(file)) {
             data = read.csv("data/res_DE2.csv", header = input$header)
         } else {
             ext <- tools::file_ext(input$input$datapath)
             validate(need(ext == "csv", "Please upload a csv file"))
             data = read.csv(file$datapath, header = input$header)
         }
+        data = data[c("X", "baseMean", "log2FoldChange", "padj")]
     })
     output$contents <- renderDataTable({
         geneExpression()
@@ -31,10 +31,15 @@ shinyServer(function(input, output, session) {
     observe({
         # Rounded to 0 or 0.5
         log2Max = ceiling(max(geneExpression()$log2FoldChange) * 2) / 2
-        updateSliderInput(session, "slider1", max=log2Max)
+        updateSliderInput(session, "slider1", max = log2Max)
     })
-    output$value <- renderPrint({ input$slider1 })
-    
+    output$value <- renderPrint({
+        input$slider1
+    })
+    output$filteredDataTable <-
+        renderDataTable({
+            subset(geneExpression(), padj < input$pvalue)
+        })
     # GO tab
     output$goContent <- renderDataTable({
         geneExpression()

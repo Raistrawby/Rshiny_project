@@ -14,17 +14,23 @@ generalAnalysisUI <- function() {
       
       hr(style = "border-top: 1px solid #cccccc;"),
       
-      h3("MA Plot:"),
+      h3("Volcano Plot:"),
       sliderInput(
         "logFCFilter",
         label = "Threshold for Log2FoldChange:",
         min = 0,
-        max = 6,
+        max = 5,
         value = 0.75,
-        step=0.05
-      )
+        step = 0.05
+      ),
+      width = 3
     ),
-    mainPanel(plotOutput("volcanoPlot"),
-              plotOutput("MAPlot"))
+    mainPanel(
+      column(6,
+             plotOutput("volcanoPlot"),),
+      column(6,
+             plotOutput("MAPlot")),
+      dataTableOutput("filteredDataTable")
+    )
   ))
 }

@@ -3,13 +3,13 @@ library(ggplot2)
 volcanoPlot <- function(data, logFilter, pvalueFilter) {
   data$diffexpdatased <- "NO"
   data$diffexpdatased[data$log2FoldChange > logFilter &
-                        data$pvalue < pvalueFilter] <- "UP"
+                        data$padj < pvalueFilter] <- "UP"
   data$diffexpdatased[data$log2FoldChange < -logFilter &
-                        data$pvalue < pvalueFilter] <- "DOWN"
+                        data$padj < pvalueFilter] <- "DOWN"
   
   ggplot(data, aes(
     x = log2FoldChange,
-    y = -log10(pvalue),
+    y = -log10(padj),
     col = diffexpdatased
   )) +
     geom_point() +
@@ -28,7 +28,7 @@ volcanoPlot <- function(data, logFilter, pvalueFilter) {
 
 MAPlot <- function(data, pvalueFilter) {
   data$diffexpdatased <- "NO"
-  data$diffexpdatased[data$pvalue < pvalueFilter] <- "YES"
+  data$diffexpdatased[data$padj < pvalueFilter] <- "YES"
   
   ggplot(data,
          aes(x = baseMean,
