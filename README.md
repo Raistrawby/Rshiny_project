@@ -2,4 +2,7 @@
 Master Rshiny project
 
 ## Requirements
-- Cluster profile
+- Clusterprofiler
+- Pathview
+- biomaRt
+- shinyWidgets: `install.packages("shinyWidgets")`

@@ -36,13 +36,19 @@ MAPlot <- function(data, pvalueFilter) {
              col = diffexpdatased)) +
     geom_point() +
     scale_x_log10() +
-    scale_color_manual(values = c("black", "red"), labels=c('Not significant', 'Significant')) +
-    labs(title = "Volcano plot",
-         colour = "Significance",
-         x = "Mean expression (log)",
-         y = "log2(Fold Change)") +
+    scale_color_manual(
+      values = c("black", "darkgreen"),
+      labels = c('Not significant', 'Significant')
+    ) +
+    labs(
+      title = "MA plot",
+      colour = "Significance",
+      x = "Mean expression (log)",
+      y = "log2(Fold Change)"
+    ) +
     theme(plot.title = element_text(face = "bold"))
 }
 
+# Tests
 volcanoPlot(data, 0.6, 0.05)
 MAPlot(data, 0.05)
