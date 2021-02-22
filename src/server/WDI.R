@@ -48,7 +48,3 @@ MAPlot <- function(data, pvalueFilter) {
     ) +
     theme(plot.title = element_text(face = "bold"))
 }
-
-# Tests
-volcanoPlot(data, 0.6, 0.05)
-MAPlot(data, 0.05)

@@ -1,4 +1,5 @@
 source("./src/UI/export.R")
+source("./src/server/WDI.R")
 
 library(shiny)
 
