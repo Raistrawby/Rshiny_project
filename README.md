@@ -1,5 +1,5 @@
 # Rshiny_project
-Master Rshiny project
+Master Rshiny project.
 
 ## Requirements
 - Clusterprofiler
