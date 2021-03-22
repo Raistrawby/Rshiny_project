@@ -4,16 +4,14 @@ goUI <- function() {
     mainPanel(dataTableOutput("goContent"))
   ))
 }
+
 ####
 
 d <- read.csv("data/res_DE2.csv")
-geneList <- d[,3] # 
-names(geneList) <- as.character(d[,1])
-geneList <- sort(geneList, decreasing = TRUE)
-data(geneList, package="DOSE")
-head(geneList)
-gene <- names(geneList)[abs(geneList) > 2]
-head(gene)
+
+###
+
+
 
 library(clusterProfiler)
 data(geneList, package="DOSE")
