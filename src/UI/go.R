@@ -18,6 +18,19 @@ get_genelist<-function(data,organism,id_source,OrgDb){
   names(geneList) = mergedData$ENTREZID
   return(geneList)
 }
+
+data=read.csv("./data/donnee2.csv")
+head(data)
+geneList =get_genelist(data,"dme","SYMBOL","org.Dm.eg.db")
+
+
+data(geneList, package="DOSE")
+gene <- names(geneList)[abs(geneList) > 2]
+gene.df <- bitr(gene, fromType = "ENTREZID",
+                toType = c("ENSEMBL", "SYMBOL"),
+                OrgDb = org.Hs.eg.db)
+head(gene.df)
+
 ggo <- groupGO(gene     = gene,
                OrgDb    = org.Hs.eg.db,
                ont      = "CC",
@@ -35,7 +48,6 @@ ego3 <- gseGO(geneList     = geneList,
               pvalueCutoff = 0.05,
               verbose      = FALSE)
 
-data=read.csv("./data/donnee2.csv")
-head(data)
-geneList =get_genelist(data,"dme","SYMBOL","org.Dm.eg.db")
+
+
 
