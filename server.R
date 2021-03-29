@@ -7,7 +7,7 @@ shinyServer(function(input, output, session) {
     # Input tab ############################
     geneExpression <-
         reactive({
-            readFile(input$input)
+            readFile(input$input, input$exemple)
         })
     output$contents <- renderDataTable({
         geneExpression()

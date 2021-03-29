@@ -5,9 +5,9 @@
   all(z >= 0 & !is.na(z))
 }
 
-readFile <- function(input) {
+readFile <- function(input, exemple) {
   file <- input
-  if (is.null(file)) {
+  if (exemple == TRUE) {
     data = read.csv("data/res_DE2.csv", header = TRUE)
   } else {
     ext <- tools::file_ext(input$datapath)
