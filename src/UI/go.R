@@ -6,6 +6,11 @@ goUI <- function() {
 }
 
 ####
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+library("pathview")
+
 get_genelist<-function(data,organism,id_source,OrgDb){
   conv<- bitr(data$X,
               fromType=id_source,
