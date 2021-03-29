@@ -6,3 +6,4 @@ Master Rshiny project.
 - Pathview
 - biomaRt
 - shinyWidgets: `install.packages("shinyWidgets")`
+- ggridges : `install.packages("ggridges")`

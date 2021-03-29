@@ -46,8 +46,32 @@ get_pathway_image <- function(geneList, pathwayid, organism) {
   )
 }
 
-geneList = get_genelist(data, "hsa", "SYMBOL", org.Hs.eg.db)
-kegg = get_KEGG_GSEA(geneList, 'hsa')
-site = get_KEGG_site(kegg, 'hsa05164')
-image = get_pathway_image(geneList, 'hsa05164', 'hsa')
-image
+get_KEGG_table <- function(kegg) {
+  kegg_result = kegg@result
+  kegg_result$URL = paste0(
+    "<a href=https://www.kegg.jp/kegg-bin/show_pathway?",
+    kegg_result$ID,
+    " target='_blank'>",
+    kegg_result$ID,
+    "</a>"
+  )
+  selected_columns = c(
+    "URL",
+    "Description",
+    "enrichmentScore",
+    "pvalue",
+    "p.adjust",
+    "rank"
+  )
+  return(kegg_result[, selected_columns])
+}
+
+get_KEGG_dotplot <- function(kegg, nbCat) {
+  return(dotplot(kegg, showCategory = nbCat) + ggtitle("Dotplot for KEGG Enrichment (GSEA)"))
+}
+
+get_KEGG_ridgeplot <- function(kegg, nbCat) {
+  return(
+    ridgeplot(kegg, showCategory = nbCat) + ggtitle("RidgePlot for KEGG Enrichment (GSEA)")
+  )
+}

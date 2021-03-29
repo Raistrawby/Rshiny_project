@@ -1,7 +1,9 @@
 source("./src/server/WDI.R")
 source("./src/server/input.R")
+source("./src/server/KEGG.R")
 
 library(shiny)
+library(org.Hs.eg.db)
 
 shinyServer(function(input, output, session) {
     # Input tab ############################
@@ -35,7 +37,24 @@ shinyServer(function(input, output, session) {
             subset(geneExpression(), padj < input$pvalue)
         })
     # GO tab ################################
-    output$goContent <- renderDataTable({
-        geneExpression()
+    
+    
+    # KEGG tab ##############################
+    output$KEGG_Selector <- renderPrint({
+        input$KEGG_Selector
+    })
+    # GSEA
+    observe({
+        geneList = get_genelist(geneExpression(), "hsa", "SYMBOL", org.Hs.eg.db)
+        kegg = get_KEGG_GSEA(geneList, 'hsa', pvalueCutoff = input$pvalue)
+        output$KEGG_GSEA_table <- renderDataTable({
+            get_KEGG_table(kegg)
+        }, escape = F)
+        output$KEGG_GSEA_dotplot <- renderPlot({
+            get_KEGG_dotplot(kegg, 10)
+        })
+        output$KEGG_GSEA_ridgeplot <- renderPlot({
+            get_KEGG_ridgeplot(kegg, 10)
+        })
     })
 })

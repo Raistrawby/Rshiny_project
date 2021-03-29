@@ -6,6 +6,7 @@ source("./src/UI/proteinDomain.R")
 source("./src/UI/export.R")
 
 library(shiny)
+library(shinyWidgets)
 
 shinyUI(
     navbarPage(
