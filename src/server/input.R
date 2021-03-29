@@ -5,14 +5,14 @@
   all(z >= 0 & !is.na(z))
 }
 
-readFile <- function(input) {
+readFile <- function(input, exemple) {
   file <- input
-  if (is.null(file)) {
-    data = read.csv("data/donnee2.csv", header = TRUE)
+  if (exemple == TRUE) {
+    data <- read.csv("data/donnee2.csv", header = TRUE)
   } else {
     ext <- tools::file_ext(input$datapath)
     validate(need(ext == "csv", "Please upload a csv file"))
-    data = read.csv(file$datapath, header = TRUE)
+    data <- read.csv(file$datapath, header = TRUE)
   }
   # Check header
   validate(
@@ -21,5 +21,5 @@ readFile <- function(input) {
       "Error: Dataset should contains columns 'X', 'baseMean', 'log2FoldChange' and 'padj'"
     )
   )
-  data = data[c("X", "baseMean", "log2FoldChange", "padj")]
+  data <- data[c("X", "baseMean", "log2FoldChange", "padj")]
 }
