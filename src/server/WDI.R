@@ -13,7 +13,7 @@ volcanoPlot <- function(data, logFilter, pvalueFilter) {
     col = diffexpdatased
   )) +
     geom_point() +
-    scale_color_manual(values = c("blue", "black", "red")) +
+    scale_color_manual(values = c("blue", "black", "goldenrod")) +
     geom_vline(xintercept = c(-logFilter, logFilter),
                col = "red") +
     geom_hline(yintercept = -log10(pvalueFilter), col = "red") +
@@ -37,7 +37,7 @@ MAPlot <- function(data, pvalueFilter) {
     geom_point() +
     scale_x_log10() +
     scale_color_manual(
-      values = c("black", "darkgreen"),
+      values = c("black", "forestgreen"),
       labels = c('Not significant', 'Significant')
     ) +
     labs(
