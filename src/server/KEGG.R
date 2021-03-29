@@ -13,7 +13,7 @@ get_genelist <- function(data, organism, id_source, OrgDb) {
                       by.y = c("SYMBOL"))
   
   mergedData <-
-    mergedData[order(mergedData$log2FoldChange, decreasing = T), ]
+    mergedData[order(mergedData$log2FoldChange, decreasing = T),]
   
   geneList = mergedData$log2FoldChange
   names(geneList) = mergedData$ENTREZID
@@ -37,15 +37,6 @@ get_KEGG_site <- function(KEGGObject, pathway) {
   return(browseKEGG(KEGGObject, pathway))
 }
 
-get_pathway_image <- function(geneList, pathwayid, organism) {
-  pathview(
-    gene.data  = geneList,
-    pathway.id = pathwayid,
-    species    = organism,
-    limit      = list(gene = max(abs(geneList)), cpd = 1)
-  )
-}
-
 get_KEGG_table <- function(kegg) {
   kegg_result = kegg@result
   kegg_result$URL = paste0(
@@ -55,14 +46,12 @@ get_KEGG_table <- function(kegg) {
     kegg_result$ID,
     "</a>"
   )
-  selected_columns = c(
-    "URL",
-    "Description",
-    "enrichmentScore",
-    "pvalue",
-    "p.adjust",
-    "rank"
-  )
+  selected_columns = c("URL",
+                       "Description",
+                       "enrichmentScore",
+                       "pvalue",
+                       "p.adjust",
+                       "rank")
   return(kegg_result[, selected_columns])
 }
 
@@ -73,5 +62,19 @@ get_KEGG_dotplot <- function(kegg, nbCat) {
 get_KEGG_ridgeplot <- function(kegg, nbCat) {
   return(
     ridgeplot(kegg, showCategory = nbCat) + ggtitle("RidgePlot for KEGG Enrichment (GSEA)")
+  )
+}
+
+
+get_pathway_image <- function(geneList,
+                              pathwayid, organism) {
+  pathview(gene.data  = geneList,
+           pathway.id = pathwayid,
+           species    = organism)
+  
+  list(
+    src = paste0(pathwayid, ".pathview.png"),
+    contentType = 'image/png',
+    width = "100%"
   )
 }

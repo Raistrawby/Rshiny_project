@@ -56,5 +56,11 @@ shinyServer(function(input, output, session) {
         output$KEGG_GSEA_ridgeplot <- renderPlot({
             get_KEGG_ridgeplot(kegg, 10)
         })
+        output$KEGG_GSEA_pathview <-
+            renderImage({
+                get_pathway_image(geneList, "hsa04621", 'hsa')
+            }, deleteFile = TRUE)
     })
+    
+    
 })
