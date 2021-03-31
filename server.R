@@ -13,6 +13,8 @@ shinyServer(function(input, output, session) {
         geneExpression()
     })
     
+    output$value <- renderPrint({ input$select })
+    
     # WDI tab ##############################
     output$volcanoPlot <-
         renderPlot({

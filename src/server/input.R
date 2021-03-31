@@ -8,7 +8,7 @@
 readFile <- function(input, exemple) {
   file <- input
   if (exemple == TRUE) {
-    data = read.csv("data/res_DE2.csv", header = TRUE)
+    data = read.csv("data/donnee2.csv", header = TRUE)
   } else {
     ext <- tools::file_ext(input$datapath)
     validate(need(ext == "csv", "Please upload a csv file"))
