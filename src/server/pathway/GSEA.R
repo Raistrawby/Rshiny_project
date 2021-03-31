@@ -1,9 +1,6 @@
 library(clusterProfiler)
-library(org.Hs.eg.db)
-library(enrichplot)
-library("pathview")
 
-get_genelist <- function(data, organism, id_source, OrgDb) {
+get_GSEA_genelist <- function(data, organism, id_source, OrgDb) {
   conv <- bitr(data$X,
                fromType = id_source,
                toType = "ENTREZID",
@@ -33,11 +30,7 @@ get_KEGG_GSEA <- function(geneList, organism, pvalueCutoff = 0.05) {
   )
 }
 
-get_KEGG_site <- function(KEGGObject, pathway) {
-  return(browseKEGG(KEGGObject, pathway))
-}
-
-get_KEGG_table <- function(kegg) {
+get_KEGG_GSEA_table <- function(kegg) {
   kegg_result = kegg@result
   kegg_result$URL = paste0(
     "<a href=https://www.kegg.jp/kegg-bin/show_pathway?",
@@ -55,18 +48,22 @@ get_KEGG_table <- function(kegg) {
   return(kegg_result[, selected_columns])
 }
 
-get_KEGG_dotplot <- function(kegg, nbCat) {
+
+get_KEGG_GSEA_dotplot <- function(kegg, nbCat) {
   return(dotplot(kegg, showCategory = nbCat) + ggtitle("Dotplot for KEGG Enrichment (GSEA)"))
 }
 
-get_KEGG_ridgeplot <- function(kegg, nbCat) {
+get_KEGG_GSEA_ridgeplot <- function(kegg, nbCat) {
   return(
     ridgeplot(kegg, showCategory = nbCat) + ggtitle("RidgePlot for KEGG Enrichment (GSEA)")
   )
 }
 
+get_KEGG_GSEA_gseaPlot <- function(kegg) {
+  return(gseaplot2(kegg, geneSetID=1, title = "GSEA plot for KEGG Enrichment"))
+}
 
-get_pathway_image <- function(geneList,
+get_GSEA_pathway_image <- function(geneList,
                               pathwayid, organism) {
   pathview(gene.data  = geneList,
            pathway.id = pathwayid,

@@ -7,3 +7,4 @@ Master Rshiny project.
 - biomaRt
 - shinyWidgets: `install.packages("shinyWidgets")`
 - ggridges : `install.packages("ggridges")`
+- ggupset: `install.packages("ggupset")`

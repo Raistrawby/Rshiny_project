@@ -3,15 +3,27 @@ pathwayUI <- function() {
     type = "tabs",
     tabPanel(
       "GSEA",
-      column(6,
+      column(4,
              plotOutput("KEGG_GSEA_dotplot")),
-      column(6,
+      column(4,
              plotOutput("KEGG_GSEA_ridgeplot")),
+      column(4,
+             plotOutput("KEGG_GSEA_gseaplot")),
       column(6,
              imageOutput("KEGG_GSEA_pathview")),
       column(6,
              dataTableOutput("KEGG_GSEA_table"))
     ),
-    tabPanel("SEA", verbatimTextOutput("summary"))
+    tabPanel(
+      "SEA",
+      column(4,
+             plotOutput("KEGG_SEA_dotplot")),
+      column(4,
+             plotOutput("KEGG_SEA_barplot")),
+      column(4,
+             plotOutput("KEGG_SEA_upsetplot")),
+      column(6,
+             dataTableOutput("KEGG_SEA_table"))
+    )
   ))
 }

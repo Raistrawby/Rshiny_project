@@ -1,9 +1,10 @@
 source("./src/server/WDI.R")
 source("./src/server/input.R")
-source("./src/server/KEGG.R")
+source("./src/server/pathway.R")
 
 library(shiny)
 library(org.Hs.eg.db)
+library(plotly)
 
 shinyServer(function(input, output, session) {
     # Input tab ############################
@@ -39,28 +40,8 @@ shinyServer(function(input, output, session) {
     # GO tab ################################
     
     
-    # KEGG tab ##############################
-    output$KEGG_Selector <- renderPrint({
-        input$KEGG_Selector
-    })
-    # GSEA
+    # Pathway tab ##############################
     observe({
-        geneList = get_genelist(geneExpression(), "hsa", "SYMBOL", org.Hs.eg.db)
-        kegg = get_KEGG_GSEA(geneList, 'hsa', pvalueCutoff = input$pvalue)
-        output$KEGG_GSEA_table <- renderDataTable({
-            get_KEGG_table(kegg)
-        }, escape = F)
-        output$KEGG_GSEA_dotplot <- renderPlot({
-            get_KEGG_dotplot(kegg, 10)
-        })
-        output$KEGG_GSEA_ridgeplot <- renderPlot({
-            get_KEGG_ridgeplot(kegg, 10)
-        })
-        output$KEGG_GSEA_pathview <-
-            renderImage({
-                get_pathway_image(geneList, "hsa04621", 'hsa')
-            }, deleteFile = TRUE)
+        pathway(input, output, geneExpression(), org.Hs.eg.db)
     })
-    
-    
 })
