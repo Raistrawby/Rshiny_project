@@ -10,11 +10,11 @@ shinyServer(function(input, output, session) {
     # Input tab ############################
     geneExpression <-
         reactive({
-            readFile(input$input, input$exemple, "SYMBOL", org.Hs.eg.db)
+            readFile(input$input, input$exemple, input$id, org.Hs.eg.db)
         })
     
     geneList <- reactive({
-        geneList <- get_geneList(geneExpression())
+        geneList <- get_geneList(geneExpression(), input$pvalue)
     })
     
     output$contents <- renderDataTable({
@@ -22,8 +22,8 @@ shinyServer(function(input, output, session) {
         geneExpression()[,-2]
     })
     
-    output$value1 <- renderPrint({ input$select1 }) # espece
-    output$value2 <- renderPrint({ input$select2 }) #type ID
+    output$espece <- renderPrint({ input$espece }) # espece
+    output$id <- renderPrint({ input$id }) #type ID
     
     # WDI tab ##############################
     output$volcanoPlot <-
@@ -57,6 +57,5 @@ shinyServer(function(input, output, session) {
     pathway(input,
             output,
             session,
-            geneList(),
-            "hsa")
+            geneList())
 })

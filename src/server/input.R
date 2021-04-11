@@ -23,29 +23,30 @@ readFile <- function(input, exemple, id_source, OrgDb) {
       "Error: Dataset should contains columns 'X', 'baseMean', 'log2FoldChange' and 'padj'"
     )
   )
-
+  
   conv <- bitr(data$X,
-    fromType = id_source,
-    toType = "ENTREZID",
-    OrgDb = OrgDb
-  )
-
+               fromType = id_source,
+               toType = "ENTREZID",
+               OrgDb = OrgDb)
+  
   data <- merge(data, conv,
-    by.x = c("X"),
-    by.y = c("SYMBOL")
-  )
-
-  data <- data[c("X", "ENTREZID", "baseMean", "log2FoldChange", "padj")]
+                by.x = c("X"),
+                by.y = c("SYMBOL"))
+  
+  data <-
+    data[c("X", "ENTREZID", "baseMean", "log2FoldChange", "padj")]
   data <- na.omit(data)
   return(data[order(data$padj), ])
 }
 
-get_geneList <- function(data) {
+get_geneList <- function(data, log2FC) {
   data <-
     data[order(data$log2FoldChange, decreasing = T), ]
-
-  geneList <- data$log2FoldChange
-  names(geneList) <- data$ENTREZID
-
-  return(geneList)
+  
+  GSEA <- data$log2FoldChange
+  names(GSEA) <- data$ENTREZID
+  
+  SEA = GSEA[abs(GSEA) > log2FC]
+  
+  return(list(GSEA = GSEA, SEA = SEA))
 }

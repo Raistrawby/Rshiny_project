@@ -10,7 +10,6 @@ get_SEA_KEGG <- function(geneList, organism) {
   ))
 }
 
-
 get_KEGG_SEA_table <- function(kegg) {
   kegg_result = kegg@result
   kegg_result$URL = paste0(
@@ -30,14 +29,14 @@ get_KEGG_SEA_table <- function(kegg) {
   return(kegg_result[, selected_columns])
 }
 
-get_KEGG_SEA_upsetplot<- function(kegg) {
-  upsetplot(kegg, showCategory=10) + ggtitle("")
+get_KEGG_SEA_upsetplot <- function(kegg) {
+  upsetplot(kegg, n = 7) + ggtitle("")
 }
 
 get_KEGG_SEA_dotplot <- function(kegg) {
-  dotplot(kegg, showCategory=10) + ggtitle("Dotplot for KEGG enrichment Analysis (SEA)")
+  dotplot(kegg, showCategory = 25) + ggtitle("Dotplot for KEGG enrichment Analysis (SEA)")
 }
 
 get_KEGG_SEA_barplot <- function(kegg) {
-  barplot(kegg, showCategory=10) + ggtitle("Barplot for KEGG enrichment Analysis (SEA)")
+  barplot(kegg, showCategory = 25) + ggtitle("Barplot for KEGG enrichment Analysis (SEA)")
 }

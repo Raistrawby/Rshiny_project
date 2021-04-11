@@ -20,7 +20,7 @@ generalAnalysisUI <- function() {
         label = "Threshold for Log2FoldChange:",
         min = 0,
         max = 5,
-        value = 0.75,
+        value = 2,
         step = 0.05
       ),
       width = 3

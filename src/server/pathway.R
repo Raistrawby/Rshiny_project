@@ -7,12 +7,11 @@ pathway <-
   function(input,
            output,
            session,
-           geneList,
-           org) {
+           geneList) {
     ############################# GSEA
     
     KEGG_GSEA <- reactive({
-      get_KEGG_GSEA(geneList, org, pvalueCutoff = input$pvalue)
+      get_KEGG_GSEA(geneList$GSEA, input$espece)
     })
     
     output$KEGG_GSEA_table <- renderDataTable({
@@ -40,7 +39,7 @@ pathway <-
       if (!is.null(input$GSEA_KEGG_selector)) {
         output$KEGG_GSEA_pathview <-
           renderImage({
-            get_GSEA_pathway_image(geneList, input$GSEA_KEGG_selector, org)
+            get_GSEA_pathway_image(geneList$GSEA, input$GSEA_KEGG_selector, input$espece)
           }, deleteFile = TRUE)
       }
     })
@@ -55,7 +54,7 @@ pathway <-
     ############################## SEA
     
     KEGG_SEA <- reactive({
-      get_SEA_KEGG(geneList, org)
+      get_SEA_KEGG(geneList$SEA, input$espece)
     })
     
     output$KEGG_SEA_table <- renderDataTable({
@@ -89,12 +88,9 @@ pathway <-
       if (!is.null(input$SEA_KEGG_selector)) {
         output$KEGG_SEA_pathview <-
           renderImage({
-            get_GSEA_pathway_image(geneList, input$SEA_KEGG_selector, org)
+            get_GSEA_pathway_image(geneList$SEA, input$SEA_KEGG_selector, input$espece)
           }, deleteFile = TRUE)
       }
     })
-    
-    
-    
     
   }
