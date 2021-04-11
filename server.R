@@ -22,6 +22,9 @@ shinyServer(function(input, output, session) {
         geneExpression()[,-2]
     })
     
+    output$value1 <- renderPrint({ input$select1 }) # espece
+    output$value2 <- renderPrint({ input$select2 }) #type ID
+    
     # WDI tab ##############################
     output$volcanoPlot <-
         renderPlot({

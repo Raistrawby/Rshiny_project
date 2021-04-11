@@ -25,13 +25,16 @@ readFile <- function(input, exemple, id_source, OrgDb) {
   )
 
   conv <- bitr(data$X,
-               fromType = id_source,
-               toType = "ENTREZID",
-               OrgDb = OrgDb)
-  
-  data <- merge(data, conv, by.x = c("X"),
-                      by.y = c("SYMBOL"))
-  
+    fromType = id_source,
+    toType = "ENTREZID",
+    OrgDb = OrgDb
+  )
+
+  data <- merge(data, conv,
+    by.x = c("X"),
+    by.y = c("SYMBOL")
+  )
+
   data <- data[c("X", "ENTREZID", "baseMean", "log2FoldChange", "padj")]
   data <- na.omit(data)
   return(data[order(data$padj), ])
@@ -40,9 +43,9 @@ readFile <- function(input, exemple, id_source, OrgDb) {
 get_geneList <- function(data) {
   data <-
     data[order(data$log2FoldChange, decreasing = T), ]
-  
-  geneList = data$log2FoldChange
-  names(geneList) = data$ENTREZID
-  
+
+  geneList <- data$log2FoldChange
+  names(geneList) <- data$ENTREZID
+
   return(geneList)
 }
