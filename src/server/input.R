@@ -1,3 +1,5 @@
+library(clusterProfiler)
+
 "%contain%" <- function(values, x) {
   tx <- table(x)
   tv <- table(values)
@@ -5,7 +7,7 @@
   all(z >= 0 & !is.na(z))
 }
 
-readFile <- function(input, exemple) {
+readFile <- function(input, exemple, id_source, OrgDb) {
   file <- input
   if (exemple == TRUE) {
     data <- read.csv("data/donnee2.csv", header = TRUE)
@@ -21,5 +23,26 @@ readFile <- function(input, exemple) {
       "Error: Dataset should contains columns 'X', 'baseMean', 'log2FoldChange' and 'padj'"
     )
   )
-  data <- data[c("X", "baseMean", "log2FoldChange", "padj")]
+
+  conv <- bitr(data$X,
+               fromType = id_source,
+               toType = "ENTREZID",
+               OrgDb = OrgDb)
+  
+  data <- merge(data, conv, by.x = c("X"),
+                      by.y = c("SYMBOL"))
+  
+  data <- data[c("X", "ENTREZID", "baseMean", "log2FoldChange", "padj")]
+  data <- na.omit(data)
+  return(data[order(data$padj), ])
+}
+
+get_geneList <- function(data) {
+  data <-
+    data[order(data$log2FoldChange, decreasing = T), ]
+  
+  geneList = data$log2FoldChange
+  names(geneList) = data$ENTREZID
+  
+  return(geneList)
 }

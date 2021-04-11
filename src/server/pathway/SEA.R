@@ -1,25 +1,5 @@
 library(clusterProfiler)
-
-get_SEA_genelist <-
-  function(data, organism, id_source, OrgDb, cutoff) {
-    data = data[data$padj < cutoff, ]
-    
-    conv <- bitr(data$X,
-                 fromType = id_source,
-                 toType = "ENTREZID",
-                 OrgDb = OrgDb)
-    
-    mergedData <- merge(data, conv, by.x = c("X"),
-                        by.y = c("SYMBOL"))
-    
-    mergedData <-
-      mergedData[order(mergedData$log2FoldChange, decreasing = T), ]
-    
-    geneList = mergedData$log2FoldChange
-    names(geneList) = mergedData$ENTREZID
-    
-    return(geneList)
-  }
+library(pathview)
 
 
 get_SEA_KEGG <- function(geneList, organism) {

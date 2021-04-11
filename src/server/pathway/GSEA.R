@@ -1,22 +1,5 @@
 library(clusterProfiler)
-
-get_GSEA_genelist <- function(data, organism, id_source, OrgDb) {
-  conv <- bitr(data$X,
-               fromType = id_source,
-               toType = "ENTREZID",
-               OrgDb = OrgDb)
-  
-  mergedData <- merge(data, conv, by.x = c("X"),
-                      by.y = c("SYMBOL"))
-  
-  mergedData <-
-    mergedData[order(mergedData$log2FoldChange, decreasing = T),]
-  
-  geneList = mergedData$log2FoldChange
-  names(geneList) = mergedData$ENTREZID
-  
-  return(geneList)
-}
+library(pathview)
 
 get_KEGG_GSEA <- function(geneList, organism, pvalueCutoff = 0.05) {
   return(
@@ -60,11 +43,11 @@ get_KEGG_GSEA_ridgeplot <- function(kegg, nbCat) {
 }
 
 get_KEGG_GSEA_gseaPlot <- function(kegg) {
-  return(gseaplot2(kegg, geneSetID=1, title = "GSEA plot for KEGG Enrichment"))
+  return(gseaplot2(kegg, geneSetID = 1, title = "GSEA plot for KEGG Enrichment"))
 }
 
 get_GSEA_pathway_image <- function(geneList,
-                              pathwayid, organism) {
+                                   pathwayid, organism) {
   pathview(gene.data  = geneList,
            pathway.id = pathwayid,
            species    = organism)

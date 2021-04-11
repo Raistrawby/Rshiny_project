@@ -9,8 +9,15 @@ pathwayUI <- function() {
              plotOutput("KEGG_GSEA_ridgeplot")),
       column(4,
              plotOutput("KEGG_GSEA_gseaplot")),
-      column(6,
-             imageOutput("KEGG_GSEA_pathview")),
+      column(
+        6,
+        selectInput(
+          "GSEA_KEGG_selector",
+          label = h4("KEGG pathway"),
+          choices = list()
+        ),
+        imageOutput("KEGG_GSEA_pathview")
+      ),
       column(6,
              dataTableOutput("KEGG_GSEA_table"))
     ),
@@ -22,6 +29,15 @@ pathwayUI <- function() {
              plotOutput("KEGG_SEA_barplot")),
       column(4,
              plotOutput("KEGG_SEA_upsetplot")),
+      column(
+        6,
+        selectInput(
+          "SEA_KEGG_selector",
+          label = h4("KEGG pathway"),
+          choices = list()
+        ),
+        imageOutput("KEGG_SEA_pathview")
+      ),
       column(6,
              dataTableOutput("KEGG_SEA_table"))
     )
