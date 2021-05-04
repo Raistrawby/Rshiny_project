@@ -1,5 +1,6 @@
 source("./src/server/WDI.R")
 source("./src/server/input.R")
+source("./src/server/GO.R")
 
 library(shiny)
 
@@ -14,7 +15,7 @@ shinyServer(function(input, output, session) {
     })
     
     output$value1 <- renderPrint({ input$select1 }) # espece
-    output$value2 <- renderPrint({ input$select2 }) #type ID
+    output$value2 <- renderPrint({ input$select2 }) # type ID
     
     # WDI tab ##############################
     output$volcanoPlot <-
@@ -38,7 +39,20 @@ shinyServer(function(input, output, session) {
             subset(geneExpression(), padj < input$pvalue)
         })
     # GO tab ################################
-    output$goContent <- renderDataTable({
-        geneExpression()
+    # GSEA
+    gse <- reactive ({
+       gse <-  gse_analysis(geneExpression())
     })
+    
+    output$goContent1 <- renderPlot({
+        display_dotplot(gse())
+    })
+    output$goContent2 <- renderPlot({
+        display_ridgeplot(gse())
+    })
+    output$goContent3 <- renderPlot({
+        display_gseplot(gse())
+    })
+    
+    # SEA
 })
