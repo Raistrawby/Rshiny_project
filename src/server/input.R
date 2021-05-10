@@ -10,7 +10,7 @@ library(clusterProfiler)
 readFile <- function(input, exemple, id_source, OrgDb) {
   file <- input
   if (exemple == TRUE) {
-    data <- read.csv("data/donnee2.csv", header = TRUE)
+    data <- read.csv("data/GSE118431_e_cig_exposure_Pantanedione_100_ppm_vs_control_without_extreme_Log2FC.csv", header = TRUE)
   } else {
     ext <- tools::file_ext(input$datapath)
     validate(need(ext == "csv", "Please upload a csv file"))
@@ -48,5 +48,5 @@ get_geneList <- function(data, log2FC) {
   
   SEA = GSEA[abs(GSEA) > log2FC]
   
-  return(list(GSEA = GSEA, SEA = SEA))
+  return(list(GSEA = GSEA, SEA = SEA, all=data))
 }

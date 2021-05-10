@@ -1,6 +1,7 @@
 source("./src/server/WDI.R")
 source("./src/server/input.R")
 source("./src/server/pathway.R")
+source("./src/server/protein_domain/protein_domain.R")
 
 library(shiny)
 library(org.Hs.eg.db)
@@ -53,8 +54,14 @@ shinyServer(function(input, output, session) {
     # GO tab ################################
     
     
-    # Pathway tab ##############################
+    # Pathway tab ###########################
     pathway(input,
+            output,
+            session,
+            geneList())
+    
+    # Protein domains #######################
+    protein(input,
             output,
             session,
             geneList())
