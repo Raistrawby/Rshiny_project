@@ -1,1 +1,33 @@
-goUI <- function() {}
+goUI <- function() {
+  fluidPage(sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      tabsetPanel(
+        tabPanel(
+          "GSEA",
+          column(
+            6,
+            plotOutput("goContent1")
+          ),
+          column(
+            6,
+            plotOutput("goContent2")
+          ),
+          plotOutput("goContent3")
+        ),
+        tabPanel(
+          "SEA",
+          column(
+            6,
+            plotOutput("goContent4")
+          ),
+          column(
+            6,
+            plotOutput("goContent5")
+          ),
+          plotOutput("goContent6")
+        )
+      )
+    )
+  ))
+}

@@ -9,7 +9,6 @@ inputUI <- function() {
       ),
       checkboxInput("exemple", "Exemple data", FALSE),
       hr(),
-      
       selectInput(
         "espece",
         label = h4("Espèce :"),
@@ -27,7 +26,7 @@ inputUI <- function() {
           "Human" = "hsa",
           "Mouse" = 11,
           "Rhesus" = 12,
-          "Myxococcus xanthus DK 1622" = 13 ,
+          "Myxococcus xanthus DK 1622" = 13,
           "Malaria" = 14,
           "Chimp" = 15,
           "Rat" = 16,
@@ -37,10 +36,8 @@ inputUI <- function() {
         ),
         selected = "hsa"
       ),
-      
       verbatimTextOutput("espece"),
       hr(),
-      
       selectInput(
         "id",
         label = h4("Type d'ID"),
