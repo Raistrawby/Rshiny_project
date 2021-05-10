@@ -50,12 +50,12 @@ sea_analysis <- function(data, id_source){
   return(go_enrich)
 }
 
-data = read.csv("./data/donnee2.csv")
+#data = read.csv("./data/donnee2.csv")
 #gse <- gse_analysis(data, "SYMBOL")
-sea <- sea_analysis(data, "SYMBOL")
+#sea <- sea_analysis(data, "SYMBOL")
 #gsea_plot(gse)
 #diplay_ridgeplot(gse)
-display_upsetplot(sea)
+#display_barplot(sea)
 
 # PLOT ###############################################################
 display_gseplot <- function(result){
