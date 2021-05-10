@@ -1,6 +1,19 @@
 goUI <- function() {
   fluidPage(sidebarLayout(
-    sidebarPanel(),
+    sidebarPanel(
+      selectInput(
+        "ontology",
+        label = h4("Ontologie"),
+        choices = list(
+          "Molecular Function" = "MF",
+          "Cellular Component" = "CC",
+          "Biological Process" = "BP",
+          "All" = "ALL"
+        ),
+        selected = "CC"
+      ),
+      verbatimTextOutput("ontology")
+    ),
     mainPanel(
       tabsetPanel(
         tabPanel(

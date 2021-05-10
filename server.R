@@ -2,7 +2,7 @@ source("./src/server/WDI.R")
 source("./src/server/input.R")
 source("./src/server/pathway.R")
 source("./src/server/protein_domain/protein_domain.R")
-source("./src/server/GO.R")
+source("./src/server/go.R")
 
 library(shiny)
 library(org.Hs.eg.db)
@@ -59,7 +59,7 @@ shinyServer(function(input, output, session) {
     # GO tab ################################
     # GSEA
     go_gse <- reactive({
-        go_gse <- gse_analysis(geneList(), input$id)
+        go_gse <- gse_analysis(geneList(), input$id, input$ontology)
     })
     
     output$goContent1 <- renderPlot({
@@ -74,7 +74,7 @@ shinyServer(function(input, output, session) {
     
     # SEA
     go_sea <- reactive({
-        go_sea <- sea_analysis(geneList(), input$id)
+        go_sea <- sea_analysis(geneList(), input$id, input$ontology)
     })
     
     output$goContent4 <- renderPlot({
