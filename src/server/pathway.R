@@ -1,5 +1,5 @@
 source("./src/server/pathway/GSEA.R")
-source("./src/server/pathway/SEA.R")
+source("./src/server/GSEA_SEA.R")
 
 library(enrichplot)
 
@@ -15,7 +15,9 @@ pathway <-
     })
     
     output$KEGG_GSEA_table <- renderDataTable({
-      get_KEGG_GSEA_table(KEGG_GSEA())
+      render_result_table(KEGG_GSEA(),
+                          "https://www.kegg.jp/kegg-bin/show_pathway?",
+                          "gsea")
     }, escape = F)
     
     
@@ -58,7 +60,9 @@ pathway <-
     })
     
     output$KEGG_SEA_table <- renderDataTable({
-      get_KEGG_SEA_table(KEGG_SEA())
+      render_result_table(KEGG_SEA(),
+                          "https://www.kegg.jp/kegg-bin/show_pathway?",
+                          "sea")
     }, escape = F)
     
     output$KEGG_SEA_upsetplot <- renderPlot({

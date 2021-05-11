@@ -8,7 +8,8 @@ proteinDomainUI <- function() {
       column(4,
              plotOutput("interpro_GSEA_ridgeplot")),
       column(4,
-             plotOutput("interpro_GSEA_gseaplot"))
+             plotOutput("interpro_GSEA_gseaplot")),
+      dataTableOutput("interpro_GSEA_table")
     ),
     tabPanel(
       "SEA",
@@ -17,8 +18,8 @@ proteinDomainUI <- function() {
       column(4,
              plotOutput("interpro_SEA_barplot")),
       column(4,
-             plotOutput("interpro_SEA_upsetplot"))
-      
+             plotOutput("interpro_SEA_upsetplot")),
+      dataTableOutput("interpro_SEA_table")
     )
   ))
 }
