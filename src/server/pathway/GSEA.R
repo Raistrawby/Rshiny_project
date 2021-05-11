@@ -14,31 +14,19 @@ get_KEGG_GSEA <- function(geneList, organism) {
   )
 }
 
-get_KEGG_GSEA_table <- function(kegg) {
-  kegg_result = kegg@result
-  kegg_result$URL = paste0(
-    "<a href=https://www.kegg.jp/kegg-bin/show_pathway?",
-    kegg_result$ID,
-    " target='_blank'>",
-    kegg_result$ID,
-    "</a>"
-  )
-  selected_columns = c("URL",
-                       "Description",
-                       "enrichmentScore",
-                       "pvalue",
-                       "p.adjust",
-                       "rank")
-  return(kegg_result[, selected_columns])
+get_SEA_KEGG <- function(geneList, organism) {
+  return(enrichKEGG(
+    gene = names(geneList),
+    organism = organism,
+    pvalueCutoff = 0.05
+  ))
 }
 
 get_GSEA_pathway_image <- function(geneList,
                                    pathwayid, organism) {
-  pathview(
-    gene.data  = geneList,
-    pathway.id = pathwayid,
-    species    = organism,
-  )
+  pathview(gene.data  = geneList,
+           pathway.id = pathwayid,
+           species    = organism,)
   
   list(
     src = paste0(pathwayid, ".pathview.png"),
