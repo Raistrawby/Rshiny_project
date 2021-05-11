@@ -11,7 +11,7 @@ goUI <- function() {
           "Biological Process" = "BP",
           "All" = "ALL"
         ),
-        selected = "CC"
+        selected = "ALL"
       ),
       verbatimTextOutput("ontology")
     ),

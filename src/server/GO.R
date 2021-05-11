@@ -6,9 +6,9 @@ library(ggupset)
 
 
 # GSEA ###############################################################
-gse_analysis <- function(data, id_source){
+gse_analysis <- function(data, id_source, ontology){
   gse <- gseGO(geneList=data$GSEA, 
-               ont ="CC", 
+               ont = ontology, 
                keyType = "ENTREZID",
                minGSSize = 100, 
                maxGSSize = 500, 
@@ -20,12 +20,12 @@ gse_analysis <- function(data, id_source){
 }
 
 # SEA ################################################################
-sea_analysis <- function(data, id_source){
+sea_analysis <- function(data, id_source, ontology){
   go_enrich <- enrichGO(gene = names(data$SEA),
                         OrgDb = org.Hs.eg.db, 
                         keyType = "ENTREZID",
                         readable = T,
-                        ont = "CC",
+                        ont = ontology,
                         pvalueCutoff = 0.05, 
                         qvalueCutoff = 0.10)
   return(go_enrich)
