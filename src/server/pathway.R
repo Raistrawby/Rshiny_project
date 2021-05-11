@@ -16,6 +16,16 @@ pathway <-
                           "gsea")
     }, escape = F)
     
+    #ce que j'ai rajouté
+    output$downloadData1 <-downloadHandler(
+      filename= function(){
+        paste("GSEA_pathway",".csv",sep="")
+      },
+      content=function(file){
+        write.csv(KEGG_GSEA(),file,row.names=TRUE)
+      }
+    )
+    # fin de ce que j'ai rajouté
     
     output$KEGG_GSEA_dotplot <- renderPlot({
       get_GSEA_dotplot(KEGG_GSEA(), 10, title="kegg dotplot")
@@ -55,6 +65,17 @@ pathway <-
                           "https://www.kegg.jp/kegg-bin/show_pathway?",
                           "sea")
     }, escape = F)
+    
+    #ce que j'ai rajouté
+    output$downloadData2 <-downloadHandler(
+     filename= function(){
+      paste("SEA_pathway",".csv",sep="")
+      },
+      content=function(file){
+        write.csv(KEGG_SEA(),file,row.names=TRUE)
+      }
+    )
+    # fin de ce que j'ai rajouté
     
     output$KEGG_SEA_upsetplot <- renderPlot({
       get_SEA_upsetplot(KEGG_SEA(), title="kegg upsetplot")

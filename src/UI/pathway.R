@@ -3,12 +3,18 @@ pathwayUI <- function() {
     type = "tabs",
     tabPanel(
       "GSEA",
-      column(4,
-             plotOutput("KEGG_GSEA_dotplot")),
-      column(4,
-             plotOutput("KEGG_GSEA_ridgeplot")),
-      column(4,
-             plotOutput("KEGG_GSEA_gseaplot")),
+      column(
+        4,
+        plotOutput("KEGG_GSEA_dotplot")
+      ),
+      column(
+        4,
+        plotOutput("KEGG_GSEA_ridgeplot")
+      ),
+      column(
+        4,
+        plotOutput("KEGG_GSEA_gseaplot")
+      ),
       column(
         6,
         selectInput(
@@ -18,17 +24,26 @@ pathwayUI <- function() {
         ),
         imageOutput("KEGG_GSEA_pathview")
       ),
-      column(6,
-             dataTableOutput("KEGG_GSEA_table"))
+      column(
+        6,
+        downloadButton("downloadData1", "Download"),
+        dataTableOutput("KEGG_GSEA_table")
+      )
     ),
     tabPanel(
       "SEA",
-      column(4,
-             plotOutput("KEGG_SEA_dotplot")),
-      column(4,
-             plotOutput("KEGG_SEA_barplot")),
-      column(4,
-             plotOutput("KEGG_SEA_upsetplot")),
+      column(
+        4,
+        plotOutput("KEGG_SEA_dotplot")
+      ),
+      column(
+        4,
+        plotOutput("KEGG_SEA_barplot")
+      ),
+      column(
+        4,
+        plotOutput("KEGG_SEA_upsetplot")
+      ),
       column(
         6,
         selectInput(
@@ -38,8 +53,13 @@ pathwayUI <- function() {
         ),
         imageOutput("KEGG_SEA_pathview")
       ),
-      column(6,
-             dataTableOutput("KEGG_SEA_table"))
+      column(
+        6,
+        # je rajoute ici
+        downloadButton("downloadData2", "Download"),
+        # je rajoute la)
+        dataTableOutput("KEGG_SEA_table")
+      )
     )
   ))
 }

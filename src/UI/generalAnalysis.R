@@ -9,9 +9,7 @@ generalAnalysisUI <- function() {
         selected = 0.05,
         grid = T
       ),
-      
       hr(style = "border-top: 1px solid #cccccc;"),
-      
       h3("Volcano Plot:"),
       sliderInput(
         "logFCFilter",
@@ -21,13 +19,18 @@ generalAnalysisUI <- function() {
         value = 0.75,
         step = 0.05
       ),
+      downloadButton("downloadData", "Download"),
       width = 3
     ),
     mainPanel(
-      column(6,
-             plotOutput("volcanoPlot"),),
-      column(6,
-             plotOutput("MAPlot")),
+      column(
+        6,
+        plotOutput("volcanoPlot"),
+      ),
+      column(
+        6,
+        plotOutput("MAPlot")
+      ),
       dataTableOutput("filteredDataTable")
     )
   ))
