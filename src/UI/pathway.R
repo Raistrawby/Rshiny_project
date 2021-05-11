@@ -19,6 +19,9 @@ pathwayUI <- function() {
         imageOutput("KEGG_GSEA_pathview")
       ),
       column(6,
+             # je rajoute ici
+             downloadButton("downloadData1", "Download"),
+             #je rajoute la)
              dataTableOutput("KEGG_GSEA_table"))
     ),
     tabPanel(
@@ -39,6 +42,9 @@ pathwayUI <- function() {
         imageOutput("KEGG_SEA_pathview")
       ),
       column(6,
+             # je rajoute ici
+             downloadButton("downloadData2", "Download"),
+             #je rajoute la)
              dataTableOutput("KEGG_SEA_table"))
     )
   ))

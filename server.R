@@ -2,7 +2,7 @@ source("./src/server/WDI.R")
 source("./src/server/input.R")
 source("./src/server/pathway.R")
 source("./src/server/protein_domain.R")
-source("./src/server/go.R")
+source("./src/server/GO.R")
 
 library(shiny)
 library(org.Hs.eg.db)
@@ -55,6 +55,18 @@ shinyServer(function(input, output, session) {
         renderDataTable({
             subset(geneExpression(), padj < input$pvalue)
         })
+    
+    #ce que j'ai rajouté
+    output$downloadData <-downloadHandler(
+        filename= function(){
+            paste(input$pvalue,".csv",sep="")
+        },
+        content=function(file){
+            write.csv(subset(geneExpression(), padj < input$pvalue),file,row.names=TRUE)
+        }
+    )
+    # fin de ce que j'ai rajouté
+    
     # GO tab ################################
     go(input, output, session, geneList)
     

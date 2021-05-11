@@ -21,6 +21,9 @@ generalAnalysisUI <- function() {
         value = 0.75,
         step = 0.05
       ),
+      # je rajoute ici
+      downloadButton("downloadData", "Download"),
+      #je rajoute la
       width = 3
     ),
     mainPanel(
