@@ -1,5 +1,6 @@
 source("./src/server/pathway/GSEA.R")
 source("./src/server/GSEA_SEA.R")
+source("./src/server/go/GO.R")
 
 library(enrichplot)
 
@@ -7,12 +8,9 @@ go <-
   function(input,
            output,
            session,
-           geneList) {
+           go_gse, 
+           go_sea) {
     # GSEA
-    go_gse <- reactive({
-      go_gse <- gse_analysis(geneList(), input$id)
-    })
-    
     output$goContent1 <- renderPlot({
       get_GSEA_dotplot(go_gse(), title = "go dotplot")
     })
@@ -30,10 +28,6 @@ go <-
     }, escape = F)
     
     # SEA
-    go_sea <- reactive({
-      go_sea <- sea_analysis(geneList(), input$id)
-    })
-    
     output$goContent4 <- renderPlot({
       get_SEA_dotplot(go_sea(), "go sea gotplot")
     })

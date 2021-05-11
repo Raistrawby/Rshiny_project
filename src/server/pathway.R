@@ -7,13 +7,9 @@ pathway <-
   function(input,
            output,
            session,
-           geneList) {
+           KEGG_GSEA,
+           KEGG_SEA) {
     ############################# GSEA
-    
-    KEGG_GSEA <- reactive({
-      get_KEGG_GSEA(geneList$GSEA, input$espece)
-    })
-    
     output$KEGG_GSEA_table <- renderDataTable({
       render_result_table(KEGG_GSEA(),
                           "https://www.kegg.jp/kegg-bin/show_pathway?",
@@ -41,7 +37,7 @@ pathway <-
       if (!is.null(input$GSEA_KEGG_selector)) {
         output$KEGG_GSEA_pathview <-
           renderImage({
-            get_GSEA_pathway_image(geneList$GSEA, input$GSEA_KEGG_selector, input$espece)
+            get_GSEA_pathway_image(KEGG_GSEA()@result$ID, input$GSEA_KEGG_selector, input$espece)
           }, deleteFile = TRUE)
       }
     })
@@ -54,11 +50,6 @@ pathway <-
     
     
     ############################## SEA
-    
-    KEGG_SEA <- reactive({
-      get_SEA_KEGG(geneList$SEA, input$espece)
-    })
-    
     output$KEGG_SEA_table <- renderDataTable({
       render_result_table(KEGG_SEA(),
                           "https://www.kegg.jp/kegg-bin/show_pathway?",
@@ -92,7 +83,7 @@ pathway <-
       if (!is.null(input$SEA_KEGG_selector)) {
         output$KEGG_SEA_pathview <-
           renderImage({
-            get_GSEA_pathway_image(geneList$SEA, input$SEA_KEGG_selector, input$espece)
+            get_GSEA_pathway_image(KEGG_SEA()@result$ID, input$SEA_KEGG_selector, input$espece)
           }, deleteFile = TRUE)
       }
     })

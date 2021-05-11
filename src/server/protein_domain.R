@@ -6,19 +6,12 @@ protein <-
   function(input,
            output,
            session,
-           geneList) {
+           interpro_gsea,
+           interpro_sea){
     ############################# INTERPRO
-    interpro_db <- reactive({
-      get_interpro_db(names(geneList$GSEA), input$espece)
-    })
-    
-    # GSEA
-    interpro_gsea <- reactive({
-      get_interpro_gsea(geneList$GSEA, interpro_db())
-    })
-    
+    # GSEA    
     output$interpro_GSEA_dotplot <- renderPlot({
-      get_GSEA_dotplot(interpro_gsea(), 1, "dotplot interpro")
+      get_GSEA_dotplot(interpro_gsea(), "dotplot interpro")
     })
     
     output$interpro_GSEA_ridgeplot <- renderPlot({
@@ -31,15 +24,11 @@ protein <-
     
     output$interpro_GSEA_table <- renderDataTable({
       render_result_table(interpro_gsea(),
-                         "https://www.ebi.ac.uk/interpro/entry/InterPro/",
-                         "gsea")
+                          "https://www.ebi.ac.uk/interpro/entry/InterPro/",
+                          "gsea")
     }, escape = F)
     
     # SEA
-    interpro_sea <- reactive({
-      get_interpro_sea(names(geneList$SEA), interpro_db())
-    })
-    
     output$interpro_SEA_dotplot <- renderPlot({
       get_SEA_dotplot(interpro_sea(), "dotplot interpro")
     })
@@ -54,7 +43,7 @@ protein <-
     
     output$interpro_SEA_table <- renderDataTable({
       render_result_table(interpro_sea(),
-                         "https://www.ebi.ac.uk/interpro/entry/InterPro/",
-                         "sea")
+                          "https://www.ebi.ac.uk/interpro/entry/InterPro/",
+                          "sea")
     }, escape = F)
   }

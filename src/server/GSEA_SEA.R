@@ -1,3 +1,4 @@
+###########################################################
 # GSEA
 get_GSEA_dotplot <- function(result_object, title, nbCat = 20) {
   return(dotplot(result_object, showCategory = nbCat) + ggtitle(title))
