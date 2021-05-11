@@ -4,36 +4,13 @@ library(ggplot2)
 ## Préparation des données pour l'enrichissement
 ##################
 get_Gene_and_Bg_ratio = function(GeneList, GeneRef) {
-  ### Urne (Liste de référence)
-  ## m : nb de gènes annotés dans la liste de référence (= pour chaque terme, cb de gènes partagent ce terme)
   m = table(GeneRef$interpro)
-  ## n : nb de gènes non annotés dans la liste de référence
   n = length(unique(GeneRef$interpro)) - m
   
-  ### CORRECTION #####################
-  # ici, on veut connaitre le nb de gènes non annotés pour chaque terme
-  # i.e. le nombre de gènes dans la liste - le nb de gènes annotés pour chaque terme
   n = length(unique(GeneRef$entrezgene_id)) - m
   
-  ### Experience (Liste d'intérêt)
-  ## x : nb de gènes annotés dans la liste d'intérêt
-  # ne pas oublier de compter ceux avec comptage nul
-  experience = merge(GeneList, GeneRef, by.x = "Gene", by.y = "entrezgene_id") # Je ne sais pas quoi mettre à cette étape ...
-  x = rep(1, length(m)) # Car chaque gène est compté qu'une fois non ?
-  
-  ### CORRECTION #####################
-  # À cette étape, on veut faire la même chose que pour m mais avec la liste d'intérêt
-  # Création de la liste d'intérêt -> table expérience (on a seulement gardé les gènes avec pval<0.05)
-  # on écrit donc la même chose que pour m avec table
-  # mais comme je l'ai dit en remarque parfois y a des termes GO où aucun des gènes de notre liste d'intérêt appartient
-  # donc il faut prendre en compte les zéros et pour cela on utilise nos termes de la liste de réf
+  experience = merge(GeneList, GeneRef, by.x = "Gene", by.y = "entrezgene_id")
   x = table(factor(experience$interpro, rownames(m)))
-  
-  ## k : nb de gènes dans la liste d'intérêt
-  k = rep(length(GeneList$Gene), length(m)) # Create vector of 6741 values = 771
-  
-  ### CORRECTION #####################
-  # ici, il suffit juste de compter le nombre de gènes dans notre liste d'intérêt
   k = length(unique(GeneList$Gene))
   
   Term = unique(GeneRef$interpro)
@@ -42,7 +19,6 @@ get_Gene_and_Bg_ratio = function(GeneList, GeneRef) {
   k = as.numeric(k)
   n = as.numeric(n)
   
-  # La longueur des vecteurs doit être de la longueur de GeneRef ou GeneList ?
   return(list(
     Term = Term,
     x = x,
@@ -56,7 +32,6 @@ get_Gene_and_Bg_ratio = function(GeneList, GeneRef) {
 ## Test hypergeometrique
 #######################
 hypergeom_test = function(x, k, m, n) {
-  ## formule pour calculer la p-valeur
   pvalue = phyper(x - 1, m, n, k, lower.tail = FALSE)
   padj = p.adjust(pvalue, n = length((pvalue)), method = "fdr")
   
@@ -110,14 +85,6 @@ load_data_for_biomaRt <- function() {
   return(data)
 }
 
-getAttributes <- function() {
-  ensembl = useEnsembl(biomart = "ensembl")
-  dataset = searchDatasets(mart = ensembl, pattern = "hsa")
-  ensembl <-
-    useEnsembl(biomart = "genes", dataset = dataset$dataset)
-  listAttributes(ensembl)
-}
-
 get_interpro_corr <- function(data, specie) {
   ensembl = useEnsembl(biomart = "ensembl")
   dataset = searchDatasets(mart = ensembl, pattern = specie)
@@ -139,7 +106,7 @@ get_interpro_corr <- function(data, specie) {
 
 get_SEA_INTERPRO <- function(data, specie) {
   data = data$all
-  GeneList = rownames(data[which(data$padj<=0.05),])
+  GeneList = rownames(data[which(data$padj <= 0.05),])
   GeneList = data.frame(Gene = GeneList)
   
   # Create table ENTREZIZ <=> InterproID
@@ -156,9 +123,49 @@ get_INTERPRO_SEA_barplot <- function(data, nb) {
   data = head(data[order(data$pvalue), ], nb)
   # data$interpro_description = factor(data$interpro_description, levels = data$interpro_description[order(data$pvalue)])
   print(data)
-  ggplot(data, aes(x = interpro_description, y = count, fill=pvalue, order=pvalue)) +
+  ggplot(data,
+         aes(
+           x = interpro_description,
+           y = count,
+           fill = pvalue,
+           order = pvalue
+         )) +
     geom_bar(stat = "identity") +
-    coord_flip() + 
+    coord_flip() +
     scale_fill_gradient(low = "blue", high = "red") +
     theme_bw()
+}
+
+get_INTERPRO_SEA_barplot <- function(data, nb) {
+  data = head(data[order(data$pvalue), ], nb)
+  # data$interpro_description = factor(data$interpro_description, levels = data$interpro_description[order(data$pvalue)])
+  ggplot(data,
+         aes(
+           x = interpro_description,
+           y = count,
+           fill = pvalue,
+           order = pvalue
+         )) +
+    geom_bar(stat = "identity") +
+    coord_flip() +
+    scale_fill_gradient(low = "blue", high = "red") +
+    theme_bw()
+}
+
+get_INTERPRO_SEA_dotplot <- function(data, nb) {
+  data = head(data[order(data$pvalue), ], nb)
+  # data$interpro_description = factor(data$interpro_description, levels = data$interpro_description[order(data$pvalue)])
+  print(data)
+  ggplot (mtcars,
+          aes (x = interpro_description, y = gene_ratio, fill = pvalue)) +
+    geom_point (stat = 'identity ', size = 6) +
+    scale_color_manual (
+      name = "Mileage ",
+      labels = c ("Above of average ", " Below average "),
+      values = c (" above " = " # 00ba38 ", " below " = " # f8766d ")
+    ) + geom_text (color = "white ", size = 2) +
+    labs (title = "Diverging Dot Plot ",
+          subtitle = "Normalized mileage of 'mtcars ': Dotplot ") +
+    ylim (-2.5, 2.5) +
+    coord_flip ()
 }

@@ -28,15 +28,3 @@ get_KEGG_SEA_table <- function(kegg) {
                        "qvalue")
   return(kegg_result[, selected_columns])
 }
-
-get_KEGG_SEA_upsetplot <- function(kegg) {
-  upsetplot(kegg, n = 7) + ggtitle("")
-}
-
-get_KEGG_SEA_dotplot <- function(kegg) {
-  dotplot(kegg, showCategory = 25) + ggtitle("Dotplot for KEGG enrichment Analysis (SEA)")
-}
-
-get_KEGG_SEA_barplot <- function(kegg) {
-  barplot(kegg, showCategory = 25) + ggtitle("Barplot for KEGG enrichment Analysis (SEA)")
-}

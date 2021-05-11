@@ -8,3 +8,5 @@ Master Rshiny project.
 - shinyWidgets: `install.packages("shinyWidgets")`
 - ggridges : `install.packages("ggridges")`
 - ggupset: `install.packages("ggupset")`
+- msigdbr `install.packages("msigdbr")`
+- plotly `install.packages("plotly")`

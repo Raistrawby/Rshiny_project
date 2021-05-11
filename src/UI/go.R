@@ -1,6 +1,6 @@
 goUI <- function() {
   fluidPage(sidebarLayout(
-    sidebarPanel(),
+    sidebarPanel(width = 2),
     mainPanel(
       tabsetPanel(
         tabPanel(
@@ -25,7 +25,14 @@ goUI <- function() {
             6,
             plotOutput("goContent5")
           ),
-          plotOutput("goContent6")
+          column(
+            6,
+            plotOutput("goContent6")
+          ),
+          column(
+            6,
+            plotOutput("goContent7")
+          )
         )
       )
     )

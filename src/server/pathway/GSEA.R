@@ -32,21 +32,6 @@ get_KEGG_GSEA_table <- function(kegg) {
   return(kegg_result[, selected_columns])
 }
 
-
-get_KEGG_GSEA_dotplot <- function(kegg, nbCat) {
-  return(dotplot(kegg, showCategory = nbCat) + ggtitle("Dotplot for KEGG Enrichment (GSEA)"))
-}
-
-get_KEGG_GSEA_ridgeplot <- function(kegg, nbCat) {
-  return(
-    ridgeplot(kegg, showCategory = nbCat) + ggtitle("RidgePlot for KEGG Enrichment (GSEA)")
-  )
-}
-
-get_KEGG_GSEA_gseaPlot <- function(kegg) {
-  return(gseaplot2(kegg, geneSetID = 1, title = "GSEA plot for KEGG Enrichment"))
-}
-
 get_GSEA_pathway_image <- function(geneList,
                                    pathwayid, organism) {
   pathview(
