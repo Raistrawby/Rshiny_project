@@ -1,5 +1,3 @@
-library(shiny)
-
 generalAnalysisUI <- function() {
   fluidPage(sidebarLayout(
     sidebarPanel(

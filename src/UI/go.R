@@ -1,6 +1,7 @@
 goUI <- function() {
   fluidPage(sidebarLayout(
     sidebarPanel(
+      width = 2,
       selectInput(
         "ontology",
         label = h4("Ontologie"),
@@ -38,7 +39,14 @@ goUI <- function() {
             6,
             plotOutput("goContent5")
           ),
-          plotOutput("goContent6")
+          column(
+            6,
+            plotOutput("goContent6")
+          ),
+          column(
+            6,
+            plotOutput("goContent7")
+          )
         )
       )
     )

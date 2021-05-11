@@ -1,12 +1,11 @@
 source("./src/server/WDI.R")
 source("./src/server/input.R")
 source("./src/server/pathway.R")
-source("./src/server/protein_domain/protein_domain.R")
-source("./src/server/go.R")
+source("./src/server/protein_domain.R")
+source("./src/server/GO.R")
 
 library(shiny)
 library(org.Hs.eg.db)
-library(plotly)
 
 shinyServer(function(input, output, session) {
     # Input tab ############################
@@ -20,8 +19,7 @@ shinyServer(function(input, output, session) {
     })
 
     output$contents <- renderDataTable({
-        # Render table without ENTREZID col
-        geneExpression()[, -2]
+        geneExpression()
     })
 
     output$espece <- renderPrint({
@@ -63,13 +61,13 @@ shinyServer(function(input, output, session) {
     })
     
     output$goContent1 <- renderPlot({
-        display_dotplot(go_gse())
+        get_GSEA_dotplot(go_gse(), title="go dotplot")
     })
     output$goContent2 <- renderPlot({
-        display_ridgeplot(go_gse())
+        get_GSEA_ridgeplot(go_gse(), title="go ridgeplot")
     })
     output$goContent3 <- renderPlot({
-        display_gseplot(go_gse())
+        get_GSEA_gseaplot(go_gse(), title="go gseaplot")
     })
     
     # SEA
@@ -78,15 +76,19 @@ shinyServer(function(input, output, session) {
     })
     
     output$goContent4 <- renderPlot({
-        display_dotplot(go_sea())
+        get_SEA_dotplot(go_sea(), "go sea gotplot")
     })
     
     output$goContent5 <- renderPlot({
-        display_barplot(go_sea())
+        get_SEA_barplot(go_sea(), title="go sea barplot")
     })
     
     output$goContent6 <- renderPlot({
-        display_upsetplot(go_sea())
+        get_SEA_upsetplot(go_sea(), title="go sea upsetplot")
+    })
+    
+    output$goContent7 <- renderPlot({
+        display_goplot(go_sea(), title="go sea goplot")
     })
 
     # Pathway tab ###########################
