@@ -3,6 +3,7 @@ source("./src/server/input.R")
 source("./src/server/pathway.R")
 source("./src/server/protein_domain.R")
 source("./src/server/GO.R")
+source("./src/server/manhattan.R")
 
 library(shiny)
 library(org.Hs.eg.db)
@@ -15,7 +16,7 @@ shinyServer(function(input, output, session) {
         })
 
     geneList <- reactive({
-        geneList <- get_geneList(geneExpression(), input$pvalue)
+        geneList <- get_geneList(geneExpression(), input$logFCFilter)
     })
 
     output$contents <- renderDataTable({
@@ -37,7 +38,7 @@ shinyServer(function(input, output, session) {
 
     output$MAPlot <-
         renderPlot({
-            MAPlot(geneExpression(), input$pvalue)
+            MAPlot(geneExpression(), input$logFCFilter, input$pvalue)
         })
 
     observe({
@@ -86,7 +87,8 @@ shinyServer(function(input, output, session) {
         output,
         session,
         KEGG_GSEA,
-        KEGG_SEA
+        KEGG_SEA,
+        geneList
     )
 
     # Protein domains #######################
@@ -108,4 +110,7 @@ shinyServer(function(input, output, session) {
     )
 
     # Manhattan #############################
+    output$manhattan <- renderPlot({
+        getManatthanPlot(go_gse(), go_sea(), KEGG_GSEA(), KEGG_SEA(), interpro_gsea(), interpro_sea())
+    })
 })

@@ -1,1 +1,3 @@
-exportUI <- function() {}
+exportUI <- function() {
+  plotOutput("manhattan")
+}

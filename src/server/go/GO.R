@@ -10,7 +10,7 @@ gse_analysis <- function(data, id_source){
   gse <- gseGO(geneList=data$GSEA, 
                ont ="BP", 
                keyType = "ENTREZID", 
-               pvalueCutoff = 0.05,
+               pvalueCutoff = 1,
                OrgDb = org.Hs.eg.db,)
   return(gse)
 }
@@ -21,8 +21,8 @@ sea_analysis <- function(data, id_source){
                         OrgDb = org.Hs.eg.db, 
                         keyType = "ENTREZID",
                         ont = "BP",
-                        pvalueCutoff = 0.05, 
-                        qvalueCutoff = 0.10)
+                        pvalueCutoff = 1, 
+                        qvalueCutoff = 1)
   return(go_enrich)
 }
 

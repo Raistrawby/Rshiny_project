@@ -6,10 +6,7 @@ get_KEGG_GSEA <- function(geneList, organism) {
     gseKEGG(
       geneList     = geneList,
       organism     = organism,
-      nPerm        = 1000,
-      minGSSize    = 120,
-      pvalueCutoff = 0.05,
-      verbose      = FALSE
+      pvalueCutoff = 1
     )
   )
 }
@@ -18,7 +15,8 @@ get_SEA_KEGG <- function(geneList, organism) {
   return(enrichKEGG(
     gene = names(geneList),
     organism = organism,
-    pvalueCutoff = 0.05
+    pvalueCutoff = 1,
+    qvalueCutoff = 1
   ))
 }
 
