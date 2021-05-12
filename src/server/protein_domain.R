@@ -28,6 +28,17 @@ protein <-
                           "gsea")
     }, escape = F)
     
+    #ce que j'ai rajouté
+    output$downloadData5 <-downloadHandler(
+      filename= function(){
+        paste("GSEA_domain",".csv",sep="")
+      },
+      content=function(file){
+        write.csv(interpro_gsea(),file,row.names=TRUE)
+      }
+    )
+    #fin de ce que j'ai add
+    
     # SEA
     output$interpro_SEA_dotplot <- renderPlot({
       get_SEA_dotplot(interpro_sea(), "dotplot interpro")
@@ -46,4 +57,13 @@ protein <-
                           "https://www.ebi.ac.uk/interpro/entry/InterPro/",
                           "sea")
     }, escape = F)
+    #ce que j'ai rajouté
+    output$downloadData6 <-downloadHandler(
+      filename= function(){
+        paste("SEA_domain",".csv",sep="")
+      },
+      content=function(file){
+        write.csv(interpro_sea(),file,row.names=TRUE)
+      }
+    )
   }
