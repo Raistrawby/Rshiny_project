@@ -13,6 +13,7 @@ goUI <- function() {
         column(4,
                plotOutput("goContent3")),
         column(8,
+               downloadButton("downloadData3", "Download"),
                dataTableOutput("go_GSEA_table")),
       ),
       tabPanel(
@@ -25,6 +26,7 @@ goUI <- function() {
                plotOutput("goContent6")),
         column(6,
                plotOutput("goContent7")),
+        downloadButton("downloadData4", "Download"),
         dataTableOutput("go_SEA_table")
       )
     ))

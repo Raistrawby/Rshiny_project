@@ -26,6 +26,15 @@ go <-
                           "http://amigo.geneontology.org/amigo/term/",
                           "gsea")
     }, escape = F)
+    #ce que j'ai rajouté
+    output$downloadData3 <-downloadHandler(
+      filename= function(){
+        paste("GSEA_go",".csv",sep="")
+      },
+      content=function(file){
+        write.csv(go_gse(),file,row.names=TRUE)
+      }
+    )
     
     # SEA
     output$goContent4 <- renderPlot({
@@ -49,4 +58,13 @@ go <-
                           "http://amigo.geneontology.org/amigo/term/",
                           "sea")
     }, escape = F)
+    #ce que j'ai rajouté
+    output$downloadData4 <-downloadHandler(
+      filename= function(){
+        paste("SEA_go",".csv",sep="")
+      },
+      content=function(file){
+        write.csv(go_sea(),file,row.names=TRUE)
+      }
+    )
   }
