@@ -20,7 +20,7 @@ goUI <- function() {
                               ),
                             ),
                             tabPanel(
-                              "SEA",
+                              "SEA/ORA",
                               sidebar("go_sea_pvalue", "go_sea_method"),
                               column(6,
                                      plotOutput("goContent4")),

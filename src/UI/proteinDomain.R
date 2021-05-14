@@ -16,7 +16,7 @@ proteinDomainUI <- function() {
       dataTableOutput("interpro_GSEA_table")
     ),
     tabPanel(
-      "SEA",
+      "SEA/ORA",
       sidebar("protein_sea_pvalue", "protein_sea_method"),
       column(4,
              plotOutput("interpro_SEA_dotplot")),

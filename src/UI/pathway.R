@@ -34,7 +34,7 @@ pathwayUI <- function() {
       )
     ),
     tabPanel(
-      "SEA",
+      "SEA/ORA",
       sidebar("pathway_sea_pvalue", "pathway_sea_method"),
       column(
         4,
