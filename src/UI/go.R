@@ -1,34 +1,37 @@
 source("./src/UI/sidebar.R")
 
 goUI <- function() {
-  fluidPage(sidebarLayout(
-    sidebarPanel(width=2),
-    mainPanel(tabsetPanel(
-      tabPanel(
-        "GSEA",
-        column(6,
-               plotOutput("goContent1")),
-        column(6,
-               plotOutput("goContent2")),
-        column(4,
-               plotOutput("goContent3")),
-        column(8,
-               downloadButton("downloadData3", "Download"),
-               dataTableOutput("go_GSEA_table")),
-      ),
-      tabPanel(
-        "SEA",
-        column(6,
-               plotOutput("goContent4")),
-        column(6,
-               plotOutput("goContent5")),
-        column(6,
-               plotOutput("goContent6")),
-        column(6,
-               plotOutput("goContent7")),
-        downloadButton("downloadData4", "Download"),
-        dataTableOutput("go_SEA_table")
-      )
-    ))
-  ))
+  fluidPage(sidebarLayout(sidebarPanel(
+                                       width = 2),
+                          mainPanel(tabsetPanel(
+                            tabPanel(
+                              "GSEA",
+                              sidebar("go_gsea_pvalue", "go_gsea_method"),
+                              column(6,
+                                     plotOutput("goContent1")),
+                              column(6,
+                                     plotOutput("goContent2")),
+                              column(4,
+                                     plotOutput("goContent3")),
+                              column(
+                                8,
+                                downloadButton("downloadData3", "Download"),
+                                dataTableOutput("go_GSEA_table")
+                              ),
+                            ),
+                            tabPanel(
+                              "SEA",
+                              sidebar("go_sea_pvalue", "go_sea_method"),
+                              column(6,
+                                     plotOutput("goContent4")),
+                              column(6,
+                                     plotOutput("goContent5")),
+                              column(6,
+                                     plotOutput("goContent6")),
+                              column(6,
+                                     plotOutput("goContent7")),
+                              downloadButton("downloadData4", "Download"),
+                              dataTableOutput("go_SEA_table")
+                            )
+                          ))))
 }

@@ -19,7 +19,7 @@ generalAnalysisUI <- function() {
       ),
       hr(style = "border-top: 1px solid #cccccc;"),
       downloadButton("downloadData", "Download filtered data"),
-      width = 3
+      width = 2
     ),
     mainPanel(
       column(

@@ -23,13 +23,6 @@ shinyServer(function(input, output, session) {
         geneExpression()
     })
 
-    output$espece <- renderPrint({
-        input$espece
-    }) # espece
-    output$id <- renderPrint({
-        input$id
-    }) # type ID
-
     # WDI tab ##############################
     output$volcanoPlot <-
         renderPlot({
@@ -48,10 +41,6 @@ shinyServer(function(input, output, session) {
         updateSliderInput(session, "slider1", max = log2Max)
     })
 
-    output$value <- renderPrint({
-        input$slider1
-    })
-
     output$filteredDataTable <-
         renderDataTable({
             subset(geneExpression(), padj < input$pvalue)
@@ -68,19 +57,19 @@ shinyServer(function(input, output, session) {
 
     # GO tab ################################
     go_gse <- reactive({
-        go_gse <- gse_analysis(geneList(), input$id)
+        go_gse <- gse_analysis(geneList(), input$go_gsea_method)
     })
     go_sea <- reactive({
-        go_sea <- sea_analysis(geneList(), input$id)
+        go_sea <- sea_analysis(geneList(), input$go_sea_method)
     })
     go(input, output, session, go_gse, go_sea)
 
     # Pathway tab ###########################
     KEGG_GSEA <- reactive({
-        get_KEGG_GSEA(geneList()$GSEA, input$espece)
+        get_KEGG_GSEA(geneList()$GSEA, input$espece, input$pathway_gsea_method)
     })
     KEGG_SEA <- reactive({
-        get_SEA_KEGG(geneList()$SEA, input$espece)
+        get_SEA_KEGG(geneList()$SEA, input$espece, input$pathway_sea_method)
     })
     pathway(
         input,
@@ -96,10 +85,10 @@ shinyServer(function(input, output, session) {
         get_interpro_db(names(geneList()$GSEA), input$espece)
     })
     interpro_gsea <- reactive({
-        get_interpro_gsea(geneList()$GSEA, interpro_db())
+        get_interpro_gsea(geneList()$GSEA, interpro_db(), input$protein_gsea_method)
     })
     interpro_sea <- reactive({
-        get_interpro_sea(names(geneList()$SEA), interpro_db())
+        get_interpro_sea(names(geneList()$SEA), interpro_db(), input$protein_sea_method)
     })
     protein(
         input,

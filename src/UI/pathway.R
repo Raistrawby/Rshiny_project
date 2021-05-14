@@ -1,8 +1,11 @@
+source("./src/UI/sidebar.R")
+
 pathwayUI <- function() {
   fluidPage(tabsetPanel(
     type = "tabs",
     tabPanel(
       "GSEA",
+      sidebar("pathway_gsea_pvalue", "pathway_gsea_method"),
       column(
         4,
         plotOutput("KEGG_GSEA_dotplot")
@@ -32,6 +35,7 @@ pathwayUI <- function() {
     ),
     tabPanel(
       "SEA",
+      sidebar("pathway_sea_pvalue", "pathway_sea_method"),
       column(
         4,
         plotOutput("KEGG_SEA_dotplot")

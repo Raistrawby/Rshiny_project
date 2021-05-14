@@ -36,7 +36,6 @@ inputUI <- function() {
         ),
         selected = "hsa"
       ),
-      verbatimTextOutput("espece"),
       hr(),
       selectInput(
         "id",
@@ -49,7 +48,6 @@ inputUI <- function() {
         ),
         selected = "SYMBOL"
       ),
-      verbatimTextOutput("id"),
     ),
     mainPanel(dataTableOutput("contents"))
   ))
