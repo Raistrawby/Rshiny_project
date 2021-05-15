@@ -6,9 +6,6 @@ library(enrichplot)
 library(ggplot2)
 library(ggupset)
 
-
-
-
 # GSEA ###############################################################
 gse_analysis <- function(data, method){
   gse <- gseGO(geneList=data$GSEA, 
@@ -35,5 +32,8 @@ sea_analysis <- function(data, method){
 # PLOT ###############################################################
 display_goplot <- function(result_object, title, padj) {
   result_object = filter_by_padj(result_object, padj)
+  validate(
+    need(nrow(result_object@result) > 0, "No Data to show")
+  )
   goplot(result_object, showCategory = 10, title=title)
 }
