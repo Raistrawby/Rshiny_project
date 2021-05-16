@@ -1,32 +1,39 @@
+source("./src/server/GSEA_SEA.R")
+
 library(clusterProfiler)
 library(org.Hs.eg.db)
 library(enrichplot)
 library(ggplot2)
 library(ggupset)
 
-
 # GSEA ###############################################################
-gse_analysis <- function(data, id_source){
+gse_analysis <- function(data, method){
   gse <- gseGO(geneList=data$GSEA, 
                ont ="BP", 
                keyType = "ENTREZID", 
-               pvalueCutoff = 0.05,
-               OrgDb = org.Hs.eg.db,)
+               pvalueCutoff = 1,
+               OrgDb = org.Hs.eg.db,
+               pAdjustMethod=method)
   return(gse)
 }
 
 # SEA ################################################################
-sea_analysis <- function(data, id_source){
+sea_analysis <- function(data, method){
   go_enrich <- enrichGO(gene = names(data$SEA),
                         OrgDb = org.Hs.eg.db, 
                         keyType = "ENTREZID",
                         ont = "BP",
-                        pvalueCutoff = 0.05, 
-                        qvalueCutoff = 0.10)
+                        pvalueCutoff = 1, 
+                        qvalueCutoff = 1,
+                        pAdjustMethod=method)
   return(go_enrich)
 }
 
 # PLOT ###############################################################
-display_goplot <- function(result, title) {
-  goplot(result, showCategory = 10, title=title)
+display_goplot <- function(result_object, title, padj) {
+  result_object = filter_by_padj(result_object, padj)
+  validate(
+    need(nrow(result_object@result) > 0, "No Data to show")
+  )
+  goplot(result_object, showCategory = 10, title=title)
 }

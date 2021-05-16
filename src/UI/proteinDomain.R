@@ -1,8 +1,11 @@
+source("./src/UI/sidebar.R")
+
 proteinDomainUI <- function() {
   fluidPage(tabsetPanel(
     type = "tabs",
     tabPanel(
       "GSEA",
+      sidebar("protein_gsea_pvalue", "protein_gsea_method"),
       column(4,
              plotOutput("interpro_GSEA_dotplot")),
       column(4,
@@ -13,7 +16,8 @@ proteinDomainUI <- function() {
       dataTableOutput("interpro_GSEA_table")
     ),
     tabPanel(
-      "SEA",
+      "SEA/ORA",
+      sidebar("protein_sea_pvalue", "protein_sea_method"),
       column(4,
              plotOutput("interpro_SEA_dotplot")),
       column(4,

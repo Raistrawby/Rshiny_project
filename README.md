@@ -102,3 +102,5 @@ It will not be maintain after june 2021
 
 
 http://yulab-smu.top/clusterProfiler-book/chapter12.html
+- plotly `install.packages("plotly")`
+- tidyverse `install.packages("tidyverse")`

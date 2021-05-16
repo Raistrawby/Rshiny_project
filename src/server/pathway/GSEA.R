@@ -1,32 +1,38 @@
 library(clusterProfiler)
 library(pathview)
 
-get_KEGG_GSEA <- function(geneList, organism) {
+get_KEGG_GSEA <- function(geneList, organism, method) {
   return(
     gseKEGG(
       geneList     = geneList,
       organism     = organism,
-      nPerm        = 1000,
-      minGSSize    = 120,
-      pvalueCutoff = 0.05,
-      verbose      = FALSE
+      pvalueCutoff = 1,
+      pAdjustMethod = method
     )
   )
 }
 
-get_SEA_KEGG <- function(geneList, organism) {
+get_SEA_KEGG <- function(geneList, organism, method) {
   return(enrichKEGG(
     gene = names(geneList),
     organism = organism,
-    pvalueCutoff = 0.05
+    pvalueCutoff = 1,
+    qvalueCutoff = 1,
+    pAdjustMethod = method
   ))
 }
 
+
 get_GSEA_pathway_image <- function(geneList,
-                                   pathwayid, organism) {
-  pathview(gene.data  = geneList,
-           pathway.id = pathwayid,
-           species    = organism,)
+                                   pathwayid,
+                                   organism
+                                   ) {
+  pathview(
+    gene.data  = geneList,
+    pathway.id = pathwayid,
+    species    = organism,
+    
+  )
   
   list(
     src = paste0(pathwayid, ".pathview.png"),

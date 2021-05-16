@@ -21,7 +21,7 @@ shinyUI(
                  pathwayUI()),
         tabPanel("Protein Domain enrichment",
                  proteinDomainUI()),
-        tabPanel("Export",
+        tabPanel("Visualization",
                  exportUI()),
         theme="style.css"
     )
