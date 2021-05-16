@@ -62,16 +62,25 @@ The 3 graphes are :
 - go dotplot
 - go ridgeplot
 - go gsea plot 
-This graph are creat with goplot()
+This graph are creat with goplot().
 
 SEA :
 pvalue and log2FoldChange are set to 0.05 and 0.1 
 This function is code by enrichGo()
 Whereas GSEA, the SEA (also called ORA) take in consideration both pvalue and log2foldchange. 
+For this tab a tree composed of biogical process, cellular processe and metabolic process.
 
+For both tab a table of GO ID clickable are present.
 ### Pathway enrichment
 As before 2 tabs are avalaible for GSEA analysis and SEA analysis.
+KEGG is used for pathway description. 
 
+### protein domain enrichment
+GSEA :
+SEA : 
+
+### Export 
+a Manhattan like figures is created with the merged of informations from the previous analysis.
 
 ## Support 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
