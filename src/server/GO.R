@@ -20,6 +20,9 @@ go <-
     output$goContent3 <- renderPlot({
       get_GSEA_gseaplot(go_gse(), title = "go gseaplot", input$go_gsea_pvalue)
     })
+    output$goContent10 <- renderPlot({
+      display_goplot(go_gse(), title = "go sea goplot", input$go_sea_pvalue)
+    })
     
     output$go_SEA_table <- renderDataTable({
       render_result_table(

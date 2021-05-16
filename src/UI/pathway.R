@@ -1,25 +1,14 @@
 source("./src/UI/sidebar.R")
 
 pathwayUI <- function() {
-  fluidPage(tabsetPanel(
-    type = "tabs",
+  tabsetPanel(
     tabPanel(
       "GSEA",
       sidebar("pathway_gsea_pvalue", "pathway_gsea_method"),
-      column(
-        4,
-        plotOutput("KEGG_GSEA_dotplot")
-      ),
-      column(
-        4,
-        plotOutput("KEGG_GSEA_ridgeplot")
-      ),
-      column(
-        4,
-        plotOutput("KEGG_GSEA_gseaplot")
-      ),
-      column(
-        6,
+      box(plotOutput("KEGG_GSEA_dotplot"), width = 4),
+      box(plotOutput("KEGG_GSEA_ridgeplot"), width = 4),
+      box(plotOutput("KEGG_GSEA_gseaplot"), width = 4),
+      box(
         selectInput(
           "GSEA_KEGG_selector",
           label = h4("KEGG pathway"),
@@ -27,29 +16,22 @@ pathwayUI <- function() {
         ),
         imageOutput("KEGG_GSEA_pathview")
       ),
-      column(
-        6,
+      box(
         downloadButton("downloadData1", "Download"),
-        dataTableOutput("KEGG_GSEA_table")
-      )
+        hr(),
+        dataTableOutput("KEGG_GSEA_table"),
+        height="1000px"
+      ),
+      
     ),
     tabPanel(
       "SEA/ORA",
       sidebar("pathway_sea_pvalue", "pathway_sea_method"),
-      column(
-        4,
-        plotOutput("KEGG_SEA_dotplot")
-      ),
-      column(
-        4,
-        plotOutput("KEGG_SEA_barplot")
-      ),
-      column(
-        4,
-        plotOutput("KEGG_SEA_upsetplot")
-      ),
-      column(
-        6,
+      box(plotOutput("KEGG_SEA_dotplot"), width = 4),
+      box(plotOutput("KEGG_SEA_barplot"), width = 4),
+      box(plotOutput("KEGG_SEA_upsetplot"), width = 4),
+      
+      box(
         selectInput(
           "SEA_KEGG_selector",
           label = h4("KEGG pathway"),
@@ -57,13 +39,13 @@ pathwayUI <- function() {
         ),
         imageOutput("KEGG_SEA_pathview")
       ),
-      column(
-        6,
-        # je rajoute ici
+      box(
         downloadButton("downloadData2", "Download"),
-        # je rajoute la)
-        dataTableOutput("KEGG_SEA_table")
-      )
+        hr(),
+        dataTableOutput("KEGG_SEA_table"),
+        height="1000px"
+      ),
+      
     )
-  ))
+  )
 }

@@ -7,22 +7,40 @@ source("./src/UI/export.R")
 
 library(shiny)
 library(shinyWidgets)
+library(shinydashboard)
 
-shinyUI(
-    navbarPage(
-        "Notre superbe app avec Logo",
-        tabPanel("Input",
-                 inputUI()),
-        tabPanel("Whole data inspection",
-                 generalAnalysisUI()),
-        tabPanel("GO terms enrichement",
-                 goUI()),
-        tabPanel("Pathway enrichment",
-                 pathwayUI()),
-        tabPanel("Protein Domain enrichment",
-                 proteinDomainUI()),
-        tabPanel("Visualization",
-                 exportUI()),
-        theme="style.css"
+dashboardPage(
+    dashboardHeader(title = "Notre superbe app"),
+    dashboardSidebar(
+        sidebarMenu(
+            menuItem(tabName = "input",
+                     "Input"),
+            menuItem(tabName = "wdi",
+                     "Whole Data Inspection"),
+            menuItem(tabName = "go",
+                     "Go Terms Enrichment"),
+            menuItem(tabName = "kegg",
+                     "Pathway Enrichment"),
+            menuItem(tabName = "protein",
+                     "Protein Domain Enrichment"),
+            menuItem(tabName = "manhattan",
+                     "Manhattan Plot")
+        )
+    ),
+    dashboardBody(
+        tabItems(
+            tabItem(tabName = "input",
+                    inputUI()),
+            tabItem(tabName = "wdi",
+                    generalAnalysisUI()),
+            tabItem(tabName = "go",
+                    goUI()),
+            tabItem(tabName = "kegg",
+                    pathwayUI()),
+            tabItem(tabName = "protein",
+                    proteinDomainUI()),
+            tabItem(tabName = "manhattan",
+                    exportUI())
+        )
     )
 )

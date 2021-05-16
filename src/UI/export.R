@@ -1,3 +1,3 @@
 exportUI <- function() {
-  plotOutput("manhattan")
+  box(plotOutput("manhattan", height="700px"), title="Summary", width = 12)
 }
