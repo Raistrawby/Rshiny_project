@@ -13,7 +13,7 @@ sidebar <- function(pvalue, method_test, rest=NULL) {
       4,
       shinyWidgets::sliderTextInput(
         pvalue,
-        "Choose an adjusted p-value threshold:",
+        "Adjusted p-value threshold:",
         choices = c(0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.5, 1),
         selected = 0.05,
         grid = T
@@ -23,7 +23,7 @@ sidebar <- function(pvalue, method_test, rest=NULL) {
       4,
       selectInput(
         method_test,
-        label = "Méthode d'ajustement de la p-valeur",
+        label = "P-value adjustment method:",
         choices = list(
           "FDR" = "fdr",
           "Bonferroni" = "bonferroni",

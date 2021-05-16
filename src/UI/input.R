@@ -3,15 +3,15 @@ inputUI <- function() {
     div(
       fileInput(
         "input",
-        "Ajoutez votre fichier CSV",
+        "Choose a CSV File",
         accept = c(".csv"),
         placeholder = "exemple.csv"
       ),
-      checkboxInput("exemple", "Exemple data", FALSE),
+      checkboxInput("exemple", "Or use an example dataset", FALSE),
     ),
     selectInput(
       "espece",
-      label = h4("Espèce :"),
+      label = h4("Specie:"),
       choices = list(
         "Anophele" = 1,
         "Arabidopsis" = 2,
@@ -39,7 +39,7 @@ inputUI <- function() {
     
     selectInput(
       "id",
-      label = h4("Type d'ID"),
+      label = h4("ID source:"),
       choices = list(
         "ENSEMBL" = "ENSEMBL",
         "ENTREZID" = "ENTREZID",

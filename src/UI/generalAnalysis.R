@@ -5,7 +5,7 @@ generalAnalysisUI <- function() {
         width = 4,
         shinyWidgets::sliderTextInput(
           "pvalue",
-          "Choose an p-adjusted threshold:",
+          "Adjusted p-value threshold:",
           choices = c(0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.5, 1),
           selected = 0.05,
           grid = T
