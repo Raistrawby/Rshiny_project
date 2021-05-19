@@ -98,17 +98,30 @@ In both method, the padjuste method is used.
 Interpro is used for this analyse and data are collected from ensembl.
 2 method of analysis are represented: 
 for both metohd the adjust method is selected. 
+<<<<<<< HEAD
 
 GSEA :
 
+=======
+GSEA :
+>>>>>>> 3b75f1cdff7fefe31f0a8be47d1072eb80c644c8
 pvalue cutoff is set to 1. 
 Different plot are created as :
 - dot plot
 - ridge plot
 -  gsea plot
 - resume table
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3b75f1cdff7fefe31f0a8be47d1072eb80c644c8
 SEA : 
+both pvalue and log2foldchange are set to 1.
+different plot are created :
+- upset plot
+- barplot
+- dotplot
+- resume table
 
 both pvalue and log2foldchange are set to 1.
 different plot are created :
@@ -139,4 +152,8 @@ A big thanks for the developpement Team that had never give up during a pandemic
 It will not be maintain after june 2021 
 
 ## References and more informations :
+<<<<<<< HEAD
 http://yulab-smu.top/clusterProfiler-book/chapter12.html
+=======
+http://yulab-smu.top/clusterProfiler-book/chapter12.html
+>>>>>>> 3b75f1cdff7fefe31f0a8be47d1072eb80c644c8
