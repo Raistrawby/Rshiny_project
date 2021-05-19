@@ -1,3 +1,3 @@
 exportUI <- function() {
-  box(plotOutput("manhattan", height="700px"), title="Summary: Pseudo Manhattan plot", width = 12)
+  box(plotOutput("manhattan", height="600px"), title="Summary: Pseudo Manhattan plot", width = 12)
 }

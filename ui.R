@@ -15,14 +15,25 @@ dashboardPage(
         sidebarMenu(
             menuItem(tabName = "input",
                      "Input"),
+            
             menuItem(tabName = "wdi",
                      "Whole Data Inspection"),
+            
             menuItem(tabName = "go",
-                     "Go Terms Enrichment"),
+                     "Go Terms Enrichment",
+                     menuSubItem("GSEA", tabName = "goGsea"),
+                     menuSubItem("SEA", tabName = "goSea")),
+            
             menuItem(tabName = "kegg",
-                     "Pathway Enrichment"),
+                     "Pathway Enrichment",
+                     menuSubItem("GSEA", tabName = "keggGsea"),
+                     menuSubItem("SEA", tabName = "keggSea")),
+            
             menuItem(tabName = "protein",
-                     "Protein Domain Enrichment"),
+                     "Protein Domain Enrichment",
+                     menuSubItem("GSEA", tabName = "proteinGsea"),
+                     menuSubItem("SEA", tabName = "proteinSea")),
+            
             menuItem(tabName = "manhattan",
                      "Manhattan Plot")
         )
@@ -33,12 +44,22 @@ dashboardPage(
                     inputUI()),
             tabItem(tabName = "wdi",
                     generalAnalysisUI()),
-            tabItem(tabName = "go",
-                    goUI()),
-            tabItem(tabName = "kegg",
-                    pathwayUI()),
-            tabItem(tabName = "protein",
-                    proteinDomainUI()),
+            
+            tabItem(tabName = "goGsea",
+                    goGsea()),
+            tabItem(tabName = "goSea",
+                    goSea()),
+            
+            tabItem(tabName = "keggGsea",
+                    pathwayGSEA()),
+            tabItem(tabName = "keggSea",
+                    pathwaySEA()),
+            
+            tabItem(tabName = "proteinGsea",
+                    proteinGsea()),
+            tabItem(tabName = "proteinSea",
+                    proteinSea()),
+            
             tabItem(tabName = "manhattan",
                     exportUI())
         )
