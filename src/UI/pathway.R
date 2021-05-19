@@ -17,8 +17,7 @@ pathwayGSEA <- function() {
     box(
       downloadButton("downloadData1", "Download"),
       hr(),
-      dataTableOutput("KEGG_GSEA_table"),
-      height = "1000px"
+      dataTableOutput("KEGG_GSEA_table")
     )
   )
 }
@@ -40,8 +39,7 @@ pathwaySEA <- function() {
     box(
       downloadButton("downloadData2", "Download"),
       hr(),
-      dataTableOutput("KEGG_SEA_table"),
-      height = "1000px"
+      dataTableOutput("KEGG_SEA_table")
     )
   )
 }

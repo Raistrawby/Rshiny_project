@@ -49,8 +49,7 @@ goSea <- function() {
       downloadButton("downloadData4", "Download"),
       hr(),
       dataTableOutput("go_SEA_table"),
-      width = 12,
-      height = "1000px"
+      width = 12
     )
   )
 }

@@ -11,8 +11,7 @@ proteinGsea <- function() {
       downloadButton("downloadData5", "Download"),
       hr(),
       dataTableOutput("interpro_GSEA_table"),
-      width = 12,
-      height = "1000px"
+      width = 12
     )
   ))
 }
@@ -27,8 +26,7 @@ proteinSea <- function() {
       downloadButton("downloadData6", "Download"),
       hr(),
       dataTableOutput("interpro_SEA_table"),
-      width = 12,
-      height = "1000px"
+      width = 12
     )
   )
 }
