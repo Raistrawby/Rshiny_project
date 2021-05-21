@@ -8,7 +8,7 @@ go <- function(input,
            geneList) {
     # GSEA
     go_gse <- reactive({
-      go_gse <- gse_analysis(geneList(), input$id)
+      go_gse <- gse_analysis(geneList(), input$id, input$ontology)
     })
     
     output$goContent1 <- renderPlot({
@@ -29,7 +29,7 @@ go <- function(input,
     
     # SEA
     go_sea <- reactive({
-      go_sea <- sea_analysis(geneList(), input$id)
+      go_sea <- sea_analysis(geneList(), input$id, input$ontology)
     })
     
     output$goContent4 <- renderPlot({

@@ -2,7 +2,7 @@ source("./src/server/WDI.R")
 source("./src/server/input.R")
 source("./src/server/pathway.R")
 source("./src/server/protein_domain.R")
-source("./src/server/go.R")
+source("./src/server/GO.R")
 
 library(shiny)
 library(org.Hs.eg.db)
