@@ -57,10 +57,10 @@ shinyServer(function(input, output, session) {
 
     # GO tab ################################
     go_gse <- reactive({
-        go_gse <- gse_analysis(geneList(), input$go_gsea_method)
+        go_gse <- gse_analysis(geneList(), input$go_gsea_method, input$ontology_gse)
     })
     go_sea <- reactive({
-        go_sea <- sea_analysis(geneList(), input$go_sea_method)
+        go_sea <- sea_analysis(geneList(), input$go_sea_method, input$ontology_sea)
     })
     go(input, output, session, go_gse, go_sea)
 

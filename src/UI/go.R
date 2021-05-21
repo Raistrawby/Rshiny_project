@@ -6,13 +6,13 @@ goGsea <- function() {
       "go_gsea_pvalue",
       "go_gsea_method",
       rest = selectInput(
-        # MARIE ! Passe ton bouton de sélecteur Go en remplaçant le bonton d'en dessous
-        # Avec ton sélecteur ALL/BP etc il s'ajoutera à droite des 2 autres
-        "test_2",
-        label = "Choix Go GSEA",
-        choices = list("FDR" = "fdr",
-                       "Bonferroni" = "bonferroni"),
-        selected = "fdr"
+        "ontology_gse",
+        label = "Choix ontologie GSEA",
+        choices = list("Biological Process" = "BP",
+                       "Cellular Component" = "CC",
+                       "Molecular Function" = "MF",
+                       "ALL" = "ALL"),
+        selected = "BP"
       )
     ),
     box(plotOutput("goContent1"), width = 4),
@@ -34,11 +34,13 @@ goSea <- function() {
       "go_sea_method",
       rest = selectInput(
         # MARIE ! IDEM ICI
-        "test_1",
-        label = "Choix Go SEA",
-        choices = list("FDR" = "fdr",
-                       "Bonferroni" = "bonferroni"),
-        selected = "fdr"
+        "ontology_sea",
+        label = "Choix ontologie SEA",
+        choices = list("Biological Process" = "BP",
+                       "Cellular Component" = "CC",
+                       "Molecular Function" = "MF",
+                       "ALL" = "ALL"),
+        selected = "BP"
       )
     ),
     box(plotOutput("goContent4"), width = 4),

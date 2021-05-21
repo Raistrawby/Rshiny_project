@@ -7,9 +7,9 @@ library(ggplot2)
 library(ggupset)
 
 # GSEA ###############################################################
-gse_analysis <- function(data, method){
+gse_analysis <- function(data, method, ontology_gse){
   gse <- gseGO(geneList=data$GSEA, 
-               ont ="BP", 
+               ont = ontology_gse, 
                keyType = "ENTREZID", 
                pvalueCutoff = 1,
                OrgDb = org.Hs.eg.db,
@@ -18,11 +18,11 @@ gse_analysis <- function(data, method){
 }
 
 # SEA ################################################################
-sea_analysis <- function(data, method){
+sea_analysis <- function(data, method, ontology_sea){
   go_enrich <- enrichGO(gene = names(data$SEA),
                         OrgDb = org.Hs.eg.db, 
                         keyType = "ENTREZID",
-                        ont = "BP",
+                        ont = ontology_sea,
                         pvalueCutoff = 1, 
                         qvalueCutoff = 1,
                         pAdjustMethod=method)
