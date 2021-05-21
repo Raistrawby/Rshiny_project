@@ -21,10 +21,13 @@ get_interpro_db <- function(entrezid, specie) {
   return(BM_DB)
 }
 
-get_interpro_gsea <- function(geneList, db) {
-  gsea = GSEA(geneList,
-              TERM2GENE = db[, c('interpro', 'entrezgene_id')],
-              pvalueCutoff = 0.15, )
+get_interpro_gsea <- function(geneList, db, method) {
+  gsea = GSEA(
+    geneList,
+    TERM2GENE = db[, c('interpro', 'entrezgene_id')],
+    pvalueCutoff = 1,
+    pAdjustMethod = method
+  )
   
   # Replace description by description in db
   # Use unique because 1 interpro ID = n entrezid
@@ -37,12 +40,13 @@ get_interpro_gsea <- function(geneList, db) {
   return(gsea)
 }
 
-get_interpro_sea <- function(geneList, db) {
+get_interpro_sea <- function(geneList, db, method) {
   sea = enricher(
     geneList,
     TERM2GENE = db[, c('interpro', 'entrezgene_id')],
     pvalueCutoff = 1,
     qvalueCutoff = 1,
+    pAdjustMethod = method
   )
   # Replace description by description in db
   # Use unique because 1 interpro ID = n entrezid
@@ -53,16 +57,4 @@ get_interpro_sea <- function(geneList, db) {
     by.y = "interpro"
   )$interpro_description
   return(sea)
-}
-
-get_interpro_table <- function(interpro, select_cols) {
-  interpro_result = interpro@result
-  interpro_result$URL = paste0(
-    "<a href=https://www.ebi.ac.uk/interpro/entry/InterPro/",
-    interpro_result$ID,
-    " target='_blank'>",
-    interpro_result$ID,
-    "</a>"
-  )
-  return(interpro_result[, select_cols])
 }

@@ -1,0 +1,44 @@
+sidebar <- function(pvalue, method_test, rest=NULL) {
+  # Add rest to row if exists
+  if (!is.null(rest)) {
+    rest =
+      column(
+        width = 4,
+        rest
+      )
+  }
+  
+  box(fluidRow(
+    column(
+      4,
+      shinyWidgets::sliderTextInput(
+        pvalue,
+        "Adjusted p-value threshold:",
+        choices = c(0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.5, 1),
+        selected = 0.05,
+        grid = T
+      )
+    ),
+    column(
+      4,
+      selectInput(
+        method_test,
+        label = "P-value adjustment method:",
+        choices = list(
+          "FDR" = "fdr",
+          "Bonferroni" = "bonferroni",
+          "holm" = "holm",
+          "hochberg" = "hochberg",
+          "hommel" = "hommel",
+          "BH" = "BH",
+          "BY" = "BY",
+          "Aucune" = "none"
+        ),
+        selected = "fdr"
+      )
+    ),
+    rest
+  ), 
+  collapsible = TRUE,
+  width = 12)
+}

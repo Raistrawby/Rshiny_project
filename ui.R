@@ -7,22 +7,61 @@ source("./src/UI/export.R")
 
 library(shiny)
 library(shinyWidgets)
+library(shinydashboard)
 
-shinyUI(
-    navbarPage(
-        "Notre superbe app avec Logo",
-        tabPanel("Input",
-                 inputUI()),
-        tabPanel("Whole data inspection",
-                 generalAnalysisUI()),
-        tabPanel("GO terms enrichement",
-                 goUI()),
-        tabPanel("Pathway enrichment",
-                 pathwayUI()),
-        tabPanel("Protein Domain enrichment",
-                 proteinDomainUI()),
-        tabPanel("Export",
-                 exportUI()),
-        theme="style.css"
+dashboardPage(
+    dashboardHeader(title = "Notre superbe app"),
+    dashboardSidebar(
+        sidebarMenu(
+            menuItem(tabName = "input",
+                     "Input"),
+            
+            menuItem(tabName = "wdi",
+                     "Whole Data Inspection"),
+            
+            menuItem(tabName = "go",
+                     "Go Terms Enrichment",
+                     menuSubItem("GSEA", tabName = "goGsea"),
+                     menuSubItem("SEA", tabName = "goSea")),
+            
+            menuItem(tabName = "kegg",
+                     "Pathway Enrichment",
+                     menuSubItem("GSEA", tabName = "keggGsea"),
+                     menuSubItem("SEA", tabName = "keggSea")),
+            
+            menuItem(tabName = "protein",
+                     "Protein Domain Enrichment",
+                     menuSubItem("GSEA", tabName = "proteinGsea"),
+                     menuSubItem("SEA", tabName = "proteinSea")),
+            
+            menuItem(tabName = "manhattan",
+                     "Manhattan Plot")
+        )
+    ),
+    dashboardBody(
+        tabItems(
+            tabItem(tabName = "input",
+                    inputUI()),
+            tabItem(tabName = "wdi",
+                    generalAnalysisUI()),
+            
+            tabItem(tabName = "goGsea",
+                    goGsea()),
+            tabItem(tabName = "goSea",
+                    goSea()),
+            
+            tabItem(tabName = "keggGsea",
+                    pathwayGSEA()),
+            tabItem(tabName = "keggSea",
+                    pathwaySEA()),
+            
+            tabItem(tabName = "proteinGsea",
+                    proteinGsea()),
+            tabItem(tabName = "proteinSea",
+                    proteinSea()),
+            
+            tabItem(tabName = "manhattan",
+                    exportUI())
+        )
     )
 )

@@ -26,9 +26,12 @@ volcanoPlot <- function(data, logFilter, pvalueFilter) {
     theme(plot.title = element_text(face = "bold"))
 }
 
-MAPlot <- function(data, pvalueFilter) {
+MAPlot <- function(data, logFilter, pvalueFilter) {
   data$diffexpdatased <- "NO"
-  data$diffexpdatased[data$padj < pvalueFilter] <- "YES"
+  data$diffexpdatased[data$log2FoldChange > logFilter &
+                        data$padj < pvalueFilter] <- "UP"
+  data$diffexpdatased[data$log2FoldChange < -logFilter &
+                        data$padj < pvalueFilter] <- "DOWN"
   
   ggplot(data,
          aes(x = baseMean,
@@ -37,8 +40,7 @@ MAPlot <- function(data, pvalueFilter) {
     geom_point() +
     scale_x_log10() +
     scale_color_manual(
-      values = c("black", "forestgreen"),
-      labels = c('Not significant', 'Significant')
+      values = c("blue", "black", "goldenrod")
     ) +
     labs(
       title = "MA plot",
