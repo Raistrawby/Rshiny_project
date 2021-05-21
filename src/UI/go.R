@@ -12,7 +12,7 @@ goGsea <- function() {
                        "Cellular Component" = "CC",
                        "Molecular Function" = "MF",
                        "ALL" = "ALL"),
-        selected = "BP"
+        selected = "ALL"
       )
     ),
     box(plotOutput("goContent1"), width = 4),
@@ -40,7 +40,7 @@ goSea <- function() {
                        "Cellular Component" = "CC",
                        "Molecular Function" = "MF",
                        "ALL" = "ALL"),
-        selected = "BP"
+        selected = "ALL"
       )
     ),
     box(plotOutput("goContent4"), width = 4),
