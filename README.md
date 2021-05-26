@@ -22,7 +22,7 @@ A csv file including in order:
 - a column named "baseMean"
 - a column named "log2FoldChange"
 - a column named "padj" containing the adjusted p-values
-They will be convert in ENTREZID thanks to DESeq2 package
+They will be convert in ENTREZID thanks to bitr package
 
 The application makes it possible to process different species, the databases implemented are those of:
 - Anophele,
@@ -57,7 +57,7 @@ GSEA analysis and SEA analysis are avalaible.
 GSEA :
 
 pvalue is set to 0.05
-Developped with gse_go() is an overreppresenation test and gene set enrichissment analysis.
+Developped with gseaGO is an overreppresenation test and gene set enrichissment analysis.
 This is based on differential expressed genes present in the dataset. GSEA doesn't take the log2FoldChange as an information. So gene with large difference are represented however small difference are only detected with SEA. IF a group of gene aggregate small difference, they will be set together. 
 In this tab you will find 3 graph and a downloadable table.
 The 3 graphes are :
@@ -130,7 +130,7 @@ a Manhattan like figures is created with the merged of informations from the pre
 ## Support 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 If you have more question please contact us :
-- mathias.lorthiois@univ-rouen.fr
+- matthias.lorthiois@univ-rouen.fr
 - manea.meslin@univ-rouen.fr
 - marie.lahaye@univ-rouen.fr
 - emma.corre@univ-rouen.fr
@@ -140,7 +140,8 @@ If you have more question please contact us :
 
 
 ## Authors and acknowledgment
-A big thanks for the developpement Team that had never give up during a pandemic (not append every day guys)
+A big thanks for the developpement Team that had never give up during a pandemic (not append every day guys).
+Thanks you to Hélène Dauchel for her supervision all along this project.
 
 ## Project status
 It will not be maintain after june 2021 
