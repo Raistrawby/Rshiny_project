@@ -6,6 +6,7 @@ source("./src/server/GO.R")
 source("./src/server/manhattan.R")
 
 library(shiny)
+library(plotly)
 library(org.Hs.eg.db)
 
 shinyServer(function(input, output, session) {
@@ -25,12 +26,12 @@ shinyServer(function(input, output, session) {
 
     # WDI tab ##############################
     output$volcanoPlot <-
-        renderPlot({
+        renderPlotly({
             volcanoPlot(geneExpression(), input$logFCFilter, input$pvalue)
         })
 
     output$MAPlot <-
-        renderPlot({
+        renderPlotly({
             MAPlot(geneExpression(), input$logFCFilter, input$pvalue)
         })
 

@@ -24,8 +24,8 @@ generalAnalysisUI <- function() {
       )
     ),
     width = 12),
-    box(plotOutput("volcanoPlot")),
-    box(plotOutput("MAPlot")),
+    box(plotlyOutput("volcanoPlot")),
+    box(plotlyOutput("MAPlot")),
     box(
       downloadButton("downloadData", "Download filtered data"),
       hr(),
