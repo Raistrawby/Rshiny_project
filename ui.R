@@ -22,17 +22,17 @@ dashboardPage(
             menuItem(tabName = "go",
                      "Go Terms Enrichment",
                      menuSubItem("GSEA", tabName = "goGsea"),
-                     menuSubItem("SEA", tabName = "goSea")),
+                     menuSubItem("SEA/ORA", tabName = "goSea")),
             
             menuItem(tabName = "kegg",
                      "Pathway Enrichment",
                      menuSubItem("GSEA", tabName = "keggGsea"),
-                     menuSubItem("SEA", tabName = "keggSea")),
+                     menuSubItem("SEA/ORA", tabName = "keggSea")),
             
             menuItem(tabName = "protein",
                      "Protein Domain Enrichment",
                      menuSubItem("GSEA", tabName = "proteinGsea"),
-                     menuSubItem("SEA", tabName = "proteinSea")),
+                     menuSubItem("SEA/ORA", tabName = "proteinSea")),
             
             menuItem(tabName = "manhattan",
                      "Manhattan Plot")

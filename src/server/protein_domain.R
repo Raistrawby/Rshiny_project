@@ -11,15 +11,15 @@ protein <-
     ############################# INTERPRO
     # GSEA    
     output$interpro_GSEA_dotplot <- renderPlot({
-      get_GSEA_dotplot(interpro_gsea(), "dotplot interpro", input$protein_gsea_pvalue)
+      get_GSEA_dotplot(interpro_gsea(), "Dotplot - Interpro GSEA", input$protein_gsea_pvalue)
     })
     
     output$interpro_GSEA_ridgeplot <- renderPlot({
-      get_GSEA_ridgeplot(interpro_gsea(), title = "ridgeplot interpro", input$protein_gsea_pvalue)
+      get_GSEA_ridgeplot(interpro_gsea(), title = "Ridgeplot - Interpro GSEA", input$protein_gsea_pvalue)
     })
     
     output$interpro_GSEA_gseaplot <- renderPlot({
-      get_GSEA_gseaplot(interpro_gsea(), title = "gseaplot interpro", input$protein_gsea_pvalue)
+      get_GSEA_gseaplot(interpro_gsea(), title = "GSEAplot - Interpro GSEA", input$protein_gsea_pvalue)
     })
     
     output$interpro_GSEA_table <- renderDataTable({
@@ -28,7 +28,6 @@ protein <-
                           "gsea", input$protein_gsea_pvalue)
     }, escape = F)
     
-    #ce que j'ai rajouté
     output$downloadData5 <-downloadHandler(
       filename= function(){
         paste("GSEA_domain",".csv",sep="")
@@ -37,19 +36,18 @@ protein <-
         write.csv(interpro_gsea(),file,row.names=TRUE)
       }
     )
-    #fin de ce que j'ai add
     
     # SEA
     output$interpro_SEA_dotplot <- renderPlot({
-      get_SEA_dotplot(interpro_sea(), "dotplot interpro", input$protein_sea_pvalue)
+      get_SEA_dotplot(interpro_sea(), "Dotplot - Interpro SEA", input$protein_sea_pvalue)
     })
     
     output$interpro_SEA_upsetplot <- renderPlot({
-      get_SEA_upsetplot(interpro_sea(), title = "upsetplot interpro", input$protein_sea_pvalue)
+      get_SEA_upsetplot(interpro_sea(), title = "Upsetplot - Interpro SEA", input$protein_sea_pvalue)
     })
     
     output$interpro_SEA_barplot <- renderPlot({
-      get_SEA_barplot(interpro_sea(), title = "barplot interpro", input$protein_sea_pvalue)
+      get_SEA_barplot(interpro_sea(), title = "Barplot - Interpro SEA", input$protein_sea_pvalue)
     })
     
     output$interpro_SEA_table <- renderDataTable({
@@ -57,7 +55,7 @@ protein <-
                           "https://www.ebi.ac.uk/interpro/entry/InterPro/",
                           "sea", input$protein_sea_pvalue)
     }, escape = F)
-    #ce que j'ai rajouté
+
     output$downloadData6 <-downloadHandler(
       filename= function(){
         paste("SEA_domain",".csv",sep="")

@@ -27,15 +27,15 @@ pathway <-
     )
     
     output$KEGG_GSEA_dotplot <- renderPlot({
-      get_GSEA_dotplot(KEGG_GSEA(), title = "kegg dotplot", input$pathway_gsea_pvalue)
+      get_GSEA_dotplot(KEGG_GSEA(), title = "Dotplot - KEGG GSEA", input$pathway_gsea_pvalue)
     })
     
     output$KEGG_GSEA_ridgeplot <- renderPlot({
-      get_GSEA_ridgeplot(KEGG_GSEA(), title = "kegg dotplot", input$pathway_gsea_pvalue)
+      get_GSEA_ridgeplot(KEGG_GSEA(), title = "Ridgeplot - KEGG GSEA", input$pathway_gsea_pvalue)
     })
     
     output$KEGG_GSEA_gseaplot <- renderPlot({
-      get_GSEA_gseaplot(KEGG_GSEA(), title = "kegg dotplot", input$pathway_gsea_pvalue)
+      get_GSEA_gseaplot(KEGG_GSEA(), title = "GSEAplot - KEGG GSEA", input$pathway_gsea_pvalue)
     })
     
     output$value <- renderPrint({
@@ -77,15 +77,15 @@ pathway <-
     )
     
     output$KEGG_SEA_upsetplot <- renderPlot({
-      get_SEA_upsetplot(KEGG_SEA(), title = "kegg upsetplot", input$pathway_sea_pvalue)
+      get_SEA_upsetplot(KEGG_SEA(), title = "Upsetplot - KEGG SEA", input$pathway_sea_pvalue)
     })
     
     output$KEGG_SEA_barplot <- renderPlot({
-      get_SEA_barplot(KEGG_SEA(), title = "kegg barplot", input$pathway_sea_pvalue)
+      get_SEA_barplot(KEGG_SEA(), title = "Barplot - KEGG SEA", input$pathway_sea_pvalue)
     })
     
     output$KEGG_SEA_dotplot <- renderPlot({
-      get_SEA_dotplot(KEGG_SEA(), title = "kegg dotplot", input$pathway_sea_pvalue)
+      get_SEA_dotplot(KEGG_SEA(), title = "Dotplot - KEGG SEA", input$pathway_sea_pvalue)
     })
     
     output$value <- renderPrint({

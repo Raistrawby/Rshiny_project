@@ -7,7 +7,7 @@ goGsea <- function() {
       "go_gsea_method",
       rest = selectInput(
         "ontology_gse",
-        label = "Choix ontologie GSEA",
+        label = "GO sub-ontology:",
         choices = list("Biological Process" = "BP",
                        "Cellular Component" = "CC",
                        "Molecular Function" = "MF",
@@ -35,7 +35,7 @@ goSea <- function() {
       rest = selectInput(
         # MARIE ! IDEM ICI
         "ontology_sea",
-        label = "Choix ontologie SEA",
+        label = "GO sub-ontology:",
         choices = list("Biological Process" = "BP",
                        "Cellular Component" = "CC",
                        "Molecular Function" = "MF",
