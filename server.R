@@ -7,13 +7,21 @@ source("./src/server/manhattan.R")
 
 library(shiny)
 library(plotly)
-library(org.Hs.eg.db)
 
 shinyServer(function(input, output, session) {
+    
+    # Organisme DB #########################
+    OrgDb <-
+        reactive({
+            org <- org_to_db(input$espece)            
+            install_orgDb(org)
+            return(eval(parse(text = org)))
+        })
+    
     # Input tab ############################
     geneExpression <-
         reactive({
-            readFile(input$input, input$exemple, input$id, org.Hs.eg.db)
+            readFile(input$input, input$exemple, input$id, OrgDb())
         })
 
     geneList <- reactive({
@@ -58,10 +66,10 @@ shinyServer(function(input, output, session) {
 
     # GO tab ################################
     go_gse <- reactive({
-        go_gse <- gse_analysis(geneList(), input$go_gsea_method, input$ontology_gse)
+        go_gse <- gse_analysis(geneList(), input$go_gsea_method, input$ontology_gse, OrgDb())
     })
     go_sea <- reactive({
-        go_sea <- sea_analysis(geneList(), input$go_sea_method, input$ontology_sea)
+        go_sea <- sea_analysis(geneList(), input$go_sea_method, input$ontology_sea, OrgDb())
     })
     go(input, output, session, go_gse, go_sea)
 

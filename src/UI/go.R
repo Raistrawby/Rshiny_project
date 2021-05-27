@@ -40,7 +40,7 @@ goSea <- function() {
                        "Cellular Component" = "CC",
                        "Molecular Function" = "MF",
                        "ALL" = "ALL"),
-        selected = "MF"
+        selected = "CP"
       )
     ),
     box(plotOutput("goContent4"), width = 4),
