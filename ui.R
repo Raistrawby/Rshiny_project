@@ -10,7 +10,7 @@ library(shinyWidgets)
 library(shinydashboard)
 
 dashboardPage(
-    dashboardHeader(title = "Notre superbe app"),
+    dashboardHeader(title = "DoRy"),
     dashboardSidebar(
         sidebarMenu(
             menuItem(tabName = "input",
