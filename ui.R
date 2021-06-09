@@ -8,6 +8,7 @@ source("./src/UI/export.R")
 library(shiny)
 library(shinyWidgets)
 library(shinydashboard)
+library(plotly)
 
 dashboardPage(
     dashboardHeader(title = "DoRy"),

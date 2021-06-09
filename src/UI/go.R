@@ -15,9 +15,9 @@ goGsea <- function() {
         selected = "ALL"
       )
     ),
-    box(plotOutput("goContent1"), width = 4),
-    box(plotOutput("goContent2"), width = 4),
-    box(plotOutput("goContent3"), width = 4),
+    box(plotOutput("goContent1"), width = 6),
+    box(plotOutput("goContent2"), width = 6),
+    box(plotOutput("goContent3"), width = 12),
     box(
       downloadButton("downloadData3", "Download"),
       hr(),
@@ -43,9 +43,9 @@ goSea <- function() {
         selected = "CC"
       )
     ),
-    box(plotOutput("goContent4"), width = 4),
-    box(plotOutput("goContent5"), width = 4),
-    box(plotOutput("goContent6"), width = 4),
+    box(plotOutput("goContent4"), width = 6),
+    box(plotOutput("goContent5"), width = 6),
+    box(plotOutput("goContent6"), width = 12),
     box(plotOutput("goContent7"), width = 12),
     box(
       downloadButton("downloadData4", "Download"),

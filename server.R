@@ -6,7 +6,6 @@ source("./src/server/GO.R")
 source("./src/server/manhattan.R")
 
 library(shiny)
-library(plotly)
 
 shinyServer(function(input, output, session) {
     

@@ -3,9 +3,9 @@ source("./src/UI/sidebar.R")
 pathwayGSEA <- function() {
   fluidPage(
     sidebar("pathway_gsea_pvalue", "pathway_gsea_method"),
-    box(plotOutput("KEGG_GSEA_dotplot"), width = 4),
-    box(plotOutput("KEGG_GSEA_ridgeplot"), width = 4),
-    box(plotOutput("KEGG_GSEA_gseaplot"), width = 4),
+    box(plotOutput("KEGG_GSEA_dotplot"), width = 6),
+    box(plotOutput("KEGG_GSEA_ridgeplot"), width = 6),
+    box(plotOutput("KEGG_GSEA_gseaplot"), width = 12),
     box(
       selectInput(
         "GSEA_KEGG_selector",
@@ -25,9 +25,9 @@ pathwayGSEA <- function() {
 pathwaySEA <- function() {
   fluidPage(
     sidebar("pathway_sea_pvalue", "pathway_sea_method"),
-    box(plotOutput("KEGG_SEA_dotplot"), width = 4),
-    box(plotOutput("KEGG_SEA_barplot"), width = 4),
-    box(plotOutput("KEGG_SEA_upsetplot"), width = 4),
+    box(plotOutput("KEGG_SEA_dotplot"), width = 6),
+    box(plotOutput("KEGG_SEA_barplot"), width = 6),
+    box(plotOutput("KEGG_SEA_upsetplot"), width = 12),
     box(
       selectInput(
         "SEA_KEGG_selector",
