@@ -20,3 +20,5 @@ install_all_Db <- function(){
   }
 }
 
+
+install_all_Db()
